@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Services\InterActionServices.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Stores\ClsStore.cs" />
     <Compile Include="Stores\InteractionStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

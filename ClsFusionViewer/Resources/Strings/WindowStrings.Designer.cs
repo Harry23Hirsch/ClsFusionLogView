@@ -61,11 +61,38 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BCS Log ähnelt.
+        /// </summary>
+        internal static string BcsLogViewTitle {
+            get {
+                return ResourceManager.GetString("BcsLogViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CLS Log ähnelt.
+        /// </summary>
+        internal static string ClsLogViewTitle {
+            get {
+                return ResourceManager.GetString("ClsLogViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die CLS Fusion Log View ähnelt.
         /// </summary>
         internal static string DefaultTitle {
             get {
                 return ResourceManager.GetString("DefaultTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CLS Status Log ähnelt.
+        /// </summary>
+        internal static string StatusLogViewTitle {
+            get {
+                return ResourceManager.GetString("StatusLogViewTitle", resourceCulture);
             }
         }
     }

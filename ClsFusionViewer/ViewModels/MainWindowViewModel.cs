@@ -19,13 +19,14 @@ namespace ClsFusionViewer.ViewModels
         private bool _clsLogEnabled;
         private bool _bcsLogEnabled;
         private bool _statusLogEnabled;
-
+        private readonly ClsStore _clsStore;
         private ICommand _openCommand;
         private ICommand _closeCommand;
         private ICommand _closeProjectCommand;
         private ICommand _clsLogViewCommand;
         private ICommand _bcsLogViewCommand;
         private ICommand _statusLogViewCommand;
+        private bool _clsLogIsChecked;
 
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
@@ -67,6 +68,15 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(ClsLogEnabled));
             }
         }
+        public bool ClsLogIsChecked
+        {
+            get => _clsLogIsChecked;
+            set
+            {
+                _clsLogIsChecked = value;
+                OnPropertyChanged(nameof(ClsLogIsChecked));
+            }
+        }
         public bool BcsLogEnabled 
         {
             get => _bcsLogEnabled;
@@ -86,6 +96,7 @@ namespace ClsFusionViewer.ViewModels
             }
         }
 
+
         public MainWindowViewModel(IServiceProvider servicesProvider)
         {
             _serviceProvider = servicesProvider;
@@ -96,6 +107,8 @@ namespace ClsFusionViewer.ViewModels
 
             _navigationStore = IoC.Helper.GetScopedService<NavigationStore>(servicesProvider);
             _navigationStore.CurrentViewModel_Changed += NavigationStore_CurrentViewModel_Changed;
+
+            _clsStore = IoC.Helper.GetScopedService<ClsStore>(servicesProvider);
 
             _openCommand = new RelayCommand<object>(OpenProjectCommand_Execute, OpenProjectCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
@@ -118,6 +131,9 @@ namespace ClsFusionViewer.ViewModels
         }
         private BaseViewModel CreateClsLogViewModel()
         {
+
+            _clsLogIsChecked = true;
+            OnPropertyChanged(nameof(ClsLogIsChecked));
             return IoC.Helper.GetScopedService<ClsLogViewModel>(_serviceProvider);
         }
 
@@ -149,6 +165,9 @@ namespace ClsFusionViewer.ViewModels
         {
             _projectLoaded = false;
             OnPropertyChanged(nameof(ProjectLoaded));
+
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+                .SetStatusBarInfoText("Projekt geschlossen.");
         }
         private bool CloseProjectCommand_CanExecute(object obj)
         {
@@ -173,12 +192,13 @@ namespace ClsFusionViewer.ViewModels
 
             var fh = new ClsFileHandler(projectPath);
 
-            IEnumerable<IEnumerable<ClsLogFileLine>> logFile = new List<IEnumerable<ClsLogFileLine>>();
             try
             {
-                logFile = fh.GetClsLogFiles();
-                if (logFile.Any())
+                _clsStore.ClsLogFiles = fh.GetClsLogFiles();
+                if (_clsStore.ClsLogFiles.Any())
+                {
                     _clsLogEnabled = true;
+                }
                 else
                     _clsLogEnabled = false;
                 OnPropertyChanged(nameof(ClsLogEnabled));
@@ -189,11 +209,10 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(ClsLogEnabled));
             }
 
-            IEnumerable<BcsBatStatusInfo> btLogFile = new List<BcsBatStatusInfo>();
             try
             {
-                btLogFile = fh.GetBtLogFiles();
-                if (btLogFile.Any())
+                _clsStore.BcsLogFiles = fh.GetBtLogFiles();
+                if (_clsStore.BcsLogFiles.Any())
                     _bcsLogEnabled = true;
                 else
                     _bcsLogEnabled = false;
@@ -205,11 +224,10 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(BcsLogEnabled));
             }
 
-            IEnumerable<ClsFaultInfo> clsFaultFile = new List<ClsFaultInfo>();
             try
             {
-                clsFaultFile = fh.GetClsFaultInfos();
-                if (clsFaultFile.Any())
+                _clsStore.ClsStatusLogFiles = fh.GetClsFaultInfos();
+                if (_clsStore.ClsStatusLogFiles.Any())
                     _statusLogEnabled = true;
                 else
                     _statusLogEnabled = false;
@@ -221,7 +239,8 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.SetStatusBarInfoText("TestText");
+            _clsLogViewCommand.Execute(null);
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.SetStatusBarInfoText("Projekt geöffnet.");
         }
     }
 }

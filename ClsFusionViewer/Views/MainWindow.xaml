@@ -85,7 +85,8 @@
                         <RadioButton Content="Cls Log"
                                      Style="{StaticResource RadioButtonTabItem}" 
                                      Visibility="{Binding ClsLogEnabled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}"
-                                     Command="{Binding ClsLogViewCommand}" />
+                                     Command="{Binding ClsLogViewCommand}"
+                                     IsChecked="{Binding ClsLogIsChecked, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <RadioButton Content="Bcs Log"
                                      Style="{StaticResource RadioButtonTabItem}"

@@ -19,12 +19,16 @@ namespace ClsFusionViewer
                 {
                     services.AddSingleton<InteractionStore>();
                     services.AddSingleton<NavigationStore>();
+                    services.AddSingleton<ClsStore>();
+
                     services.AddSingleton<NavigationService>();
                     services.AddTransient<InterActionServices>();
-                    services.AddSingleton<MainWindowViewModel>();
+
                     services.AddTransient<ClsLogViewModel>();
                     services.AddTransient<BcsLogViewModel>();
                     services.AddTransient<StatusLogViewModel>();
+
+                    services.AddSingleton<MainWindowViewModel>();
                     services.AddSingleton(s => new MainWindow
                     {
                         DataContext = s.GetService<MainWindowViewModel>()
