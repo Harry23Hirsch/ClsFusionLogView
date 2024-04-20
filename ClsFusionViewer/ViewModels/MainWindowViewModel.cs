@@ -183,7 +183,7 @@ namespace ClsFusionViewer.ViewModels
                     _clsLogEnabled = false;
                 OnPropertyChanged(nameof(ClsLogEnabled));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _clsLogEnabled = false;
                 OnPropertyChanged(nameof(ClsLogEnabled));
@@ -199,7 +199,7 @@ namespace ClsFusionViewer.ViewModels
                     _bcsLogEnabled = false;
                 OnPropertyChanged(nameof(BcsLogEnabled));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _bcsLogEnabled = false;
                 OnPropertyChanged(nameof(BcsLogEnabled));
@@ -215,7 +215,7 @@ namespace ClsFusionViewer.ViewModels
                     _statusLogEnabled = false;
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _statusLogEnabled = false;
                 OnPropertyChanged(nameof(StatusLogEnabled));
