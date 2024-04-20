@@ -1,26 +1,19 @@
 ﻿using ClsFusionViewer.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ClsFusionViewer.ViewModels
 {
-    public class BcsLogViewModel : BaseViewModel
+    public class BcsLogViewModel : BaseLogViewModel
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public BcsLogViewModel(IServiceProvider serviceProvider)
+        public BcsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider) 
         {
-            _serviceProvider = serviceProvider;
-
-            SetGlobals();
+                
         }
 
-        private void SetGlobals()
+        public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -28,7 +21,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.BcsLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
                 .SetStatusBarInfoText("");
         }
     }

@@ -4,22 +4,15 @@ using System;
 
 namespace ClsFusionViewer.ViewModels
 {
-    public class ClsLogViewModel : BaseViewModel
+    public class ClsLogViewModel : BaseLogViewModel
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly ClsStore _clsStore;
-
-        public ClsLogViewModel(IServiceProvider serviceProvider)
+        public ClsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
-
-            SetGlobals();
         }
 
-        private void SetGlobals()
+        public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -27,7 +20,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.ClsLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
                 .SetStatusBarInfoText("");
         }
     }

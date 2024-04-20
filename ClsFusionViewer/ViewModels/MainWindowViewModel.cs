@@ -15,18 +15,20 @@ namespace ClsFusionViewer.ViewModels
         private readonly IServiceProvider _serviceProvider;
         private readonly InteractionStore _interactionStore;
         private readonly NavigationStore _navigationStore;
+        private readonly ClsStore _clsStore;
+
         private bool _projectLoaded;
         private bool _clsLogEnabled;
+        private bool _clsLogIsChecked;
         private bool _bcsLogEnabled;
         private bool _statusLogEnabled;
-        private readonly ClsStore _clsStore;
-        private ICommand _openCommand;
-        private ICommand _closeCommand;
-        private ICommand _closeProjectCommand;
-        private ICommand _clsLogViewCommand;
-        private ICommand _bcsLogViewCommand;
-        private ICommand _statusLogViewCommand;
-        private bool _clsLogIsChecked;
+
+        private readonly ICommand _openCommand;
+        private readonly ICommand _closeCommand;
+        private readonly ICommand _closeProjectCommand;
+        private readonly ICommand _clsLogViewCommand;
+        private readonly ICommand _bcsLogViewCommand;
+        private readonly ICommand _statusLogViewCommand;
 
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
@@ -152,10 +154,12 @@ namespace ClsFusionViewer.ViewModels
 
         private void OpenProjectCommand_Execute(object obj)
         {
-            Test();
+            if (Test())
+            {
+                _projectLoaded = true;
+                OnPropertyChanged(nameof(ProjectLoaded));
+            }
 
-            _projectLoaded = true;
-            OnPropertyChanged(nameof(ProjectLoaded));
         }
         private bool OpenProjectCommand_CanExecute(object obj)
         {
@@ -181,13 +185,13 @@ namespace ClsFusionViewer.ViewModels
                 mw.Close();
         }
 
-        private void Test()
+        private bool Test()
         {
             var projectPath = IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.OpenFolderDialog() ?? throw new AccessViolationException();
 
             if (string.IsNullOrEmpty(projectPath))
             {
-                return;
+                return false;
             }
 
             var fh = new ClsFileHandler(projectPath);
@@ -240,7 +244,10 @@ namespace ClsFusionViewer.ViewModels
             }
 
             _clsLogViewCommand.Execute(null);
+
             IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.SetStatusBarInfoText("Projekt geöffnet.");
+
+            return true;
         }
     }
 }
