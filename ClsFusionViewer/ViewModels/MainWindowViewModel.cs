@@ -17,13 +17,15 @@ namespace ClsFusionViewer.ViewModels
         private readonly NavigationStore _navigationStore;
         private ICommand _openCommand;
         private ICommand _closeCommand;
-        private bool _projectLoade;
+        private bool _projectLoaded;
         private bool _clsLogEnabled;
         private bool _bcsLogEnabled;
         private bool _statusLogEnabled;
+        private ICommand _closeProjectCommand;
 
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
+        public ICommand CloseProjectCommand => _closeProjectCommand;
 
         public BaseViewModel CurrentViewModel
         {
@@ -42,10 +44,10 @@ namespace ClsFusionViewer.ViewModels
         }
         public bool ProjectLoaded
         {
-            get => _projectLoade;
+            get => _projectLoaded;
             set
             {
-                _projectLoade = value;
+                _projectLoaded = value;
                 OnPropertyChanged(nameof(ProjectLoaded));
             }
         }
@@ -80,18 +82,19 @@ namespace ClsFusionViewer.ViewModels
         public MainWindowViewModel(IServiceProvider servicesProvider)
         {
             _serviceProvider = servicesProvider;
+            
             _interactionStore = IoC.Helper.GetScopedService<InteractionStore>(servicesProvider);
-            _navigationStore = IoC.Helper.GetScopedService<NavigationStore>(servicesProvider);
-
             _interactionStore.WindowTitle_Changed += InteractionStore_WindowTitle_Changed;
             _interactionStore.StatusBarInfoText_Changed += InteractionStore_StatusBarInfoText_Changed;
 
+            _navigationStore = IoC.Helper.GetScopedService<NavigationStore>(servicesProvider);
             _navigationStore.CurrentViewModel_Changed += NavigationStore_CurrentViewModel_Changed;
 
-            _openCommand = new RelayCommand<object>(OpenCommand_Execute);
+            _openCommand = new RelayCommand<object>(OpenCommand_Execute, OpenCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
+            _closeProjectCommand = new RelayCommand<object>(CloseProjectCommand_Execute, CloseProjectCommand_CanExecute);
 
-            _projectLoade = false;
+            _projectLoaded = false;
         }
 
 
@@ -112,8 +115,12 @@ namespace ClsFusionViewer.ViewModels
         {
             Test();
 
-            _projectLoade = true;
+            _projectLoaded = true;
             OnPropertyChanged(nameof(ProjectLoaded));
+        }
+        private bool OpenCommand_CanExecute(object obj)
+        {
+            return !_projectLoaded;
         }
         private void CloseCommand_Execute(object obj)
         {
@@ -121,6 +128,15 @@ namespace ClsFusionViewer.ViewModels
             var mw = (MainWindow)obj;
             if (mw !=  null)
                 mw.Close();
+        }
+        private void CloseProjectCommand_Execute(object obj)
+        {
+            _projectLoaded = false;
+            OnPropertyChanged(nameof(ProjectLoaded));
+        }
+        private bool CloseProjectCommand_CanExecute(object obj)
+        {
+            return _projectLoaded;
         }
 
         private void Test()

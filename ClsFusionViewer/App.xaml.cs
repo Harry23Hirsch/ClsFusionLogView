@@ -40,7 +40,6 @@ namespace ClsFusionViewer
 
                 ss.GetRequiredService<InterActionServices>()?.SetWindowTitle(WindowStrings.DefaultTitle);
 
-
                 MainWindow = ss.GetRequiredService<MainWindow>();
                 MainWindow.Show();
             }

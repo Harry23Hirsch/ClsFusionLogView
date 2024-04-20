@@ -33,15 +33,14 @@
                 <MenuItem Header="ClsProjekt _öffnen" 
                           Command="{Binding OpenCommand, UpdateSourceTrigger=PropertyChanged}"/>
                 
+                <MenuItem Header="ClsProjekt _schliessen"
+                          Command="{Binding CloseProjectCommand, UpdateSourceTrigger=PropertyChanged}" />
+                
                 <Separator />
                 
                 <MenuItem Header="_Beenden"
                           Command="{Binding CloseCommand, UpdateSourceTrigger=PropertyChanged}"
                           CommandParameter="{Binding ElementName=MyMainWindow}"/>
-            </MenuItem>
-
-            <MenuItem Header="_Ansicht">
-                
             </MenuItem>
 
             <MenuItem Header="_Hilfe">
@@ -69,14 +68,13 @@
                     BorderBrush="DarkGray"
                     Visibility="{Binding ProjectLoaded, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}">
 
-
-
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <!--TabBar-->
                     <StackPanel Grid.Row="0"
                                 Orientation="Horizontal"
                                 Margin="2 5 0 0">
@@ -95,6 +93,7 @@
 
                     </StackPanel>
 
+                    <!--Content-->
                     <Border Grid.Row="1"
                             BorderThickness="1"
                             BorderBrush="DarkGray"
@@ -111,6 +110,15 @@
                             </LinearGradientBrush>
 
                         </Border.Background>
+
+                        <ContentControl>
+
+                            <ContentControl.Resources>
+                                
+                                
+                            </ContentControl.Resources>
+                            
+                        </ContentControl>
 
                     </Border>
 
