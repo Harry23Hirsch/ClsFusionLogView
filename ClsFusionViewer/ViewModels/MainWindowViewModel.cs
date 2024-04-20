@@ -15,17 +15,24 @@ namespace ClsFusionViewer.ViewModels
         private readonly IServiceProvider _serviceProvider;
         private readonly InteractionStore _interactionStore;
         private readonly NavigationStore _navigationStore;
-        private ICommand _openCommand;
-        private ICommand _closeCommand;
         private bool _projectLoaded;
         private bool _clsLogEnabled;
         private bool _bcsLogEnabled;
         private bool _statusLogEnabled;
+
+        private ICommand _openCommand;
+        private ICommand _closeCommand;
         private ICommand _closeProjectCommand;
+        private ICommand _clsLogViewCommand;
+        private NavigateCommand _bcsLogViewCommand;
+        private ICommand _statusLogViewCommand;
 
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
         public ICommand CloseProjectCommand => _closeProjectCommand;
+        public ICommand ClsLogViewCommand => _clsLogViewCommand;
+        public ICommand BcsLogViewCommand => _bcsLogViewCommand;
+        public ICommand StatusLogViewCommand => _statusLogViewCommand;
 
         public BaseViewModel CurrentViewModel
         {
@@ -90,13 +97,29 @@ namespace ClsFusionViewer.ViewModels
             _navigationStore = IoC.Helper.GetScopedService<NavigationStore>(servicesProvider);
             _navigationStore.CurrentViewModel_Changed += NavigationStore_CurrentViewModel_Changed;
 
-            _openCommand = new RelayCommand<object>(OpenCommand_Execute, OpenCommand_CanExecute);
+            _openCommand = new RelayCommand<object>(OpenProjectCommand_Execute, OpenProjectCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
             _closeProjectCommand = new RelayCommand<object>(CloseProjectCommand_Execute, CloseProjectCommand_CanExecute);
+
+            _clsLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateClsLogViewModel));
+            _bcsLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateBcsLogViewModel));
+            _statusLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateStatusLogViewModel));
 
             _projectLoaded = false;
         }
 
+        private BaseViewModel CreateStatusLogViewModel()
+        {
+            return IoC.Helper.GetScopedService<StatusLogViewModel>(_serviceProvider);
+        }
+        private BaseViewModel CreateBcsLogViewModel()
+        {
+            return IoC.Helper.GetScopedService<BcsLogViewModel>(_serviceProvider);
+        }
+        private BaseViewModel CreateClsLogViewModel()
+        {
+            return IoC.Helper.GetScopedService<ClsLogViewModel>(_serviceProvider);
+        }
 
         private void NavigationStore_CurrentViewModel_Changed()
         {
@@ -111,23 +134,16 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(StatusBarInfoText));
         }
 
-        private void OpenCommand_Execute(object obj)
+        private void OpenProjectCommand_Execute(object obj)
         {
             Test();
 
             _projectLoaded = true;
             OnPropertyChanged(nameof(ProjectLoaded));
         }
-        private bool OpenCommand_CanExecute(object obj)
+        private bool OpenProjectCommand_CanExecute(object obj)
         {
             return !_projectLoaded;
-        }
-        private void CloseCommand_Execute(object obj)
-        {
-            // Nicht das Schönste
-            var mw = (MainWindow)obj;
-            if (mw !=  null)
-                mw.Close();
         }
         private void CloseProjectCommand_Execute(object obj)
         {
@@ -137,6 +153,13 @@ namespace ClsFusionViewer.ViewModels
         private bool CloseProjectCommand_CanExecute(object obj)
         {
             return _projectLoaded;
+        }
+        private void CloseCommand_Execute(object obj)
+        {
+            // Nicht das Schönste
+            var mw = (MainWindow)obj;
+            if (mw !=  null)
+                mw.Close();
         }
 
         private void Test()

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ClsFusionViewer.Services;
 using ClsFusionViewer.Stores;
-using ClsFusionViewer.Resources;
+using ClsFusionViewer.Resources.Strings;
 
 namespace ClsFusionViewer
 {
@@ -22,6 +22,9 @@ namespace ClsFusionViewer
                     services.AddSingleton<NavigationService>();
                     services.AddTransient<InterActionServices>();
                     services.AddSingleton<MainWindowViewModel>();
+                    services.AddTransient<ClsLogViewModel>();
+                    services.AddTransient<BcsLogViewModel>();
+                    services.AddTransient<StatusLogViewModel>();
                     services.AddSingleton(s => new MainWindow
                     {
                         DataContext = s.GetService<MainWindowViewModel>()

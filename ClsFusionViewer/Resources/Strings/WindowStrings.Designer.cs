@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClsFusionViewer.Resources {
+namespace ClsFusionViewer.Resources.Strings {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ClsFusionViewer.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClsFusionViewer.Resources.WindowStrings", typeof(WindowStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClsFusionViewer.Resources.Strings.WindowStrings", typeof(WindowStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -6,7 +6,7 @@
         <Setter Property="Margin"
                 Value="0 0 2 0" />
         <Setter Property="Background"
-                Value="#EEEEEE" />
+                Value="#cccccc" />
         <Setter Property="Width"
                 Value="80" />
         <Setter Property="Height"
@@ -17,6 +17,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderThickness="1 1 1 0"
                             BorderBrush="Silver"
+                            CornerRadius="3 3 0 0"
                             Width="{TemplateBinding Width}">
                         <ContentPresenter HorizontalAlignment="Left"
                                           VerticalAlignment="Center" 
@@ -30,13 +31,13 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="LightGray" />
+                        Value="#d9d9d9" />
             </Trigger>
 
             <Trigger Property="IsChecked"
                      Value="True">
                 <Setter Property="Background"
-                        Value="LightGray" />
+                        Value="#b3b3b3" />
             </Trigger>
         </Style.Triggers>
     </Style>

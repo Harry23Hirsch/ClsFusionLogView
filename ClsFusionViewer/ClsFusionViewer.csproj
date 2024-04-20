@@ -204,7 +204,7 @@
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="IoC\Helper.cs" />
-    <Compile Include="Resources\WindowStrings.Designer.cs">
+    <Compile Include="Resources\Strings\WindowStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WindowStrings.resx</DependentUpon>
@@ -214,8 +214,24 @@
     <Compile Include="Stores\InteractionStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BcsLogViewModel.cs" />
+    <Compile Include="ViewModels\ClsLogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModels\StatusLogViewModel.cs" />
+    <Compile Include="Views\BcsLogView.xaml.cs">
+      <DependentUpon>BcsLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClsLogView.xaml.cs">
+      <DependentUpon>ClsLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusLogView.xaml.cs">
+      <DependentUpon>StatusLogView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\BcsLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -223,11 +239,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Themes\RadioButton_TabItem_Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClsLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,7 +274,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\WindowStrings.resx">
+    <EmbeddedResource Include="Resources\Strings\WindowStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WindowStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
