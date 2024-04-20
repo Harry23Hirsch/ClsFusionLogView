@@ -24,7 +24,7 @@ namespace ClsFusionViewer.ViewModels
         private ICommand _closeCommand;
         private ICommand _closeProjectCommand;
         private ICommand _clsLogViewCommand;
-        private NavigateCommand _bcsLogViewCommand;
+        private ICommand _bcsLogViewCommand;
         private ICommand _statusLogViewCommand;
 
         public ICommand OpenCommand => _openCommand;
