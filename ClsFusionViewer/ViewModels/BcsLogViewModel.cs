@@ -11,11 +11,10 @@ namespace ClsFusionViewer.ViewModels
 {
     public class BcsLogViewModel : BaseLogViewModel
     {
+        private readonly string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
         private readonly IServiceProvider _serviceProvider;
         private readonly ClsStore _clsStore;
         private ObservableCollection<BcsBatStatusInfoViewModel> _bcsLogs;
-        private IEnumerable<BcsBatStatusInfo> _bcsLogsCopy;
-        private string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
         private string _filterSelectedItem;
         private int _filterSelectedIndex;
         private BcsBatStatusInfoViewModel _bcsLogsSelectedItem;
