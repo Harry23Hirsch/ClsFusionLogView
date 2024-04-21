@@ -78,8 +78,8 @@ namespace ClsFusionViewer.ViewModels
 
             _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(_clsStore.BcsLogFiles.Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
-            this.FilterSelectedItem = _filterList.First();
-
+            _filterSelectedItem = _filterList.First();
+            
             SetGlobals();
         }
 
