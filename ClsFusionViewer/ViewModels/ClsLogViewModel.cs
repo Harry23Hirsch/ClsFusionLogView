@@ -1,6 +1,7 @@
 ﻿using ClsFusionViewer.Services;
 using ClsFusionViewer.Stores;
 using InoTec;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,18 @@ namespace ClsFusionViewer.ViewModels
     public class ClsLogViewModel : BaseLogViewModel
     {
         private ObservableCollection<ObservableCollection<ClsLogFileLine>> _clsLogFiles;
+        private readonly IServiceProvider _serviceProvider;
+        private ClsStore _clsStore;
 
-        public ObservableCollection<ClsLogFileLine> ClsLogFiles => MapLogs(base.ClsStore.ClsLogFiles);
+        public ObservableCollection<ClsLogFileLine> ClsLogFiles => MapLogs(_clsStore.ClsLogFiles);
 
-        public ClsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ClsLogViewModel(IServiceProvider serviceProvider)
         {
-            base.ClsStore.ClsLogFiles_Changed += ClsStore_ClsLogFiles_Changed;
+            _serviceProvider = serviceProvider;
+            _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
+            _clsStore.ClsLogFiles_Changed += ClsStore_ClsLogFiles_Changed;
+
+            SetGlobals();
         }
 
         private void ClsStore_ClsLogFiles_Changed()
@@ -41,7 +48,7 @@ namespace ClsFusionViewer.ViewModels
 
         public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -49,7 +56,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.ClsLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
                 .SetStatusBarInfoText($"CLS Log-Einträge gefunden: {this.ClsLogFiles.Count}");
         }
     }

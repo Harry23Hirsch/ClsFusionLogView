@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ClsFusionViewer.Services;
 using ClsFusionViewer.Stores;
 using ClsFusionViewer.Resources.Strings;
+using System;
 
 namespace ClsFusionViewer
 {

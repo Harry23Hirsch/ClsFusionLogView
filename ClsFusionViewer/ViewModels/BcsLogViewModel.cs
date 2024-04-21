@@ -1,4 +1,5 @@
 ﻿using ClsFusionViewer.Services;
+using ClsFusionViewer.Stores;
 using InoTec;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,16 @@ namespace ClsFusionViewer.ViewModels
     public class BcsLogViewModel : BaseLogViewModel
     {
         private readonly IServiceProvider _serviceProvider;
-        private ObservableCollection<BcsBatStatusInfo> _bcsLogs;
+        private readonly ClsStore _clsStore;
+        private ObservableCollection<BcsBatStatusInfoViewModel> _bcsLogs;
+        private IEnumerable<BcsBatStatusInfo> _bcsLogsCopy;
         private string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
         private string _filterSelectedItem;
         private int _filterSelectedIndex;
-        private BcsBatStatusInfo _bcsLogsSelectedItem;
+        private BcsBatStatusInfoViewModel _bcsLogsSelectedItem;
         private int _bcsLogsSelectedIndex;
 
-        public ObservableCollection<BcsBatStatusInfo> BcsLogs 
+        public ObservableCollection<BcsBatStatusInfoViewModel> BcsLogs 
         {
             get => _bcsLogs;
             set
@@ -27,7 +30,7 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(BcsLogs));
             }
         }
-        public BcsBatStatusInfo BcsLogsSelectedItem
+        public BcsBatStatusInfoViewModel BcsLogsSelectedItem
         {
             get => _bcsLogsSelectedItem;
             set
@@ -54,9 +57,7 @@ namespace ClsFusionViewer.ViewModels
                 _filterSelectedItem = value;
                 OnPropertyChanged(nameof(FilterSelectedItem));
 
-
                 FilterLogFiles();
-
             }
         }
         public int FilterSelectedIndex
@@ -70,93 +71,91 @@ namespace ClsFusionViewer.ViewModels
             }
         }
 
-        public BcsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider) 
+        public BcsLogViewModel(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
 
-            base.ClsStore.BcsLogFiles_Changed += ClsStore_BcsLogFiles_Changed;
-
-            _bcsLogs = new ObservableCollection<BcsBatStatusInfo>(base.ClsStore.BcsLogFiles);
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(_clsStore.BcsLogFiles.Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
-            _filterSelectedItem = _filterList.First();
-        }
+            this.FilterSelectedItem = _filterList.First();
 
-        private void ClsStore_BcsLogFiles_Changed()
-        {
-            OnPropertyChanged(nameof(BcsLogs));
+            SetGlobals();
         }
 
         private void FilterLogFiles()
         {
-            var logs = new ObservableCollection<BcsBatStatusInfo>(base.ClsStore.BcsLogFiles);
+            _bcsLogs.Clear();
+            _bcsLogsSelectedItem = null;
 
-            switch (this.FilterSelectedItem)
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(_clsStore.BcsLogFiles.Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
+            _bcsLogsSelectedItem = _bcsLogs.Last();
+
+            BcsBatStatusInfoViewModel item = null;
+
+            if (this.FilterSelectedItem.Equals(_filterList[1]))
             {
-                case "Alle":
-
-                    _bcsLogs = new ObservableCollection<BcsBatStatusInfo>(base.ClsStore.BcsLogFiles);
-                    OnPropertyChanged(nameof(BcsLogs));
-
-                    _bcsLogsSelectedItem = logs.Last();
-                    OnPropertyChanged(nameof(BcsLogsSelectedItem));
-
-                    break;
-
-                case "15min":
-
-                    var result = new List<BatStatus>();
-                    var al = logs;
-                    long temp = _bcsLogsSelectedItem.BcsBatStatus.First().N;
-                    long last = _bcsLogsSelectedItem.BcsBatStatus.Last().N;
-
-                    foreach (BatStatus b in _bcsLogsSelectedItem.BcsBatStatus)
-                    {
-                        if (b.N == last)
-                        {
-                            result.Add(b);
-                            break;
-                        }
-
-                        if (b.N >= temp + 180)
-                        {
-                            temp = b.N;
-                            result.Add(b);
-                        }
-                    }
-
-                    _bcsLogsSelectedItem.BcsBatStatus = result;
-
-                    _bcsLogs = al;
-                    OnPropertyChanged(nameof(BcsLogs));
-
-                    OnPropertyChanged(nameof(BcsLogsSelectedItem));
-
-
-                    break;
-
-                case "20min":
-                    _bcsLogs = null;
-                    OnPropertyChanged(nameof(BcsLogs));
-
-                    _bcsLogsSelectedItem = null;
-                    OnPropertyChanged(nameof(BcsLogsSelectedItem));
-                    break;
-
-                case "30min":
-                    break;
-
-                case "40min":
-                    break;
-
-                case "60min":
-                    break;
-
+                item = FilterBatStatus(_bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)], 900);
             }
-        }
+            else if (this.FilterSelectedItem.Equals(_filterList[2]))
+            {
+                item = FilterBatStatus(_bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)], 1200);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[3]))
+            {
+                item = FilterBatStatus(_bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)], 1800);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[4]))
+            {
+                item = FilterBatStatus(_bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)], 2400);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[5]))
+            {
+                item = FilterBatStatus(_bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)], 3600);
+            }
 
+            if (item != null)
+            {
+                _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)] = item;
+                _bcsLogsSelectedItem = item;
+            }
+
+            OnPropertyChanged(nameof(BcsLogs));
+            OnPropertyChanged(nameof(BcsLogsSelectedItem));
+
+            return;
+        }
+        private BcsBatStatusInfoViewModel FilterBatStatus(BcsBatStatusInfoViewModel item, int timeStop)
+        {
+            var result = new List<BatStatus>();
+            long temp = item.BcsBatStatus.First().N;
+            long last = item.BcsBatStatus.Last().N;
+
+            result.Add(item.BcsBatStatus.First());
+
+            foreach (BatStatus b in item.BcsBatStatus)
+            {
+                if (b.N == last)
+                {
+                    result.Add(b);
+                    break;
+                }
+
+                var foo = temp + timeStop;
+                if (b.N >= foo)
+                {
+                    temp = b.N;
+                    result.Add(b);
+                }
+            }
+
+            item.BcsBatStatus = new ObservableCollection<BatStatus>(result);
+
+            return item;
+        }
         public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -164,7 +163,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.BcsLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
                 .SetStatusBarInfoText("");
         }
     }
