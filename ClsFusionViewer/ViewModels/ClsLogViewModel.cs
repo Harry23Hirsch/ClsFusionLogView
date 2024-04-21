@@ -23,6 +23,7 @@ namespace ClsFusionViewer.ViewModels
         {
             OnPropertyChanged(nameof(this.ClsLogFiles));
         }
+
         private ObservableCollection<ClsLogFileLine> MapLogs(IEnumerable<IEnumerable<ClsLogFileLine>> logs)
         {
             var result = new ObservableCollection<ClsLogFileLine>();

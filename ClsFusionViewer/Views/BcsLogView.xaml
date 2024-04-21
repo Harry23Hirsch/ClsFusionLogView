@@ -12,6 +12,7 @@
         <convert:UnixTicksToDateTimeConverter x:Key="UnixTicksToDateTime" />
         <convert:IntToFloatConverter x:Key="IntToDouble" />
     </UserControl.Resources>
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -33,29 +34,29 @@
             </StackPanel.Resources>
             
             <ComboBox x:Name="cb_LogFiles"
-                      ItemsSource="{Binding BcsLogs}">
+                      ItemsSource="{Binding BcsLogs, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding BcsLogsSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                      HorizontalContentAlignment="left"
+                      VerticalContentAlignment="Center">
 
                 <ComboBox.ItemTemplate>
 
                     <DataTemplate DataType="{x:Type ComboBoxItem}">
-                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}}" />
+                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}, UpdateSourceTrigger=PropertyChanged}" 
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"/>
                     </DataTemplate>
 
                 </ComboBox.ItemTemplate>
 
             </ComboBox>
 
-            <ComboBox x:Name="cb_Interval">
-
-                <ComboBox.ItemTemplate>
-
-                    <DataTemplate DataType="{x:Type ComboBoxItem}">
-                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}}" />
-                    </DataTemplate>
-
-                </ComboBox.ItemTemplate>
-
-
+            <ComboBox x:Name="cb_Filter"
+                      ItemsSource="{Binding FilterList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding FilterSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                      Width="100"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Center">
             </ComboBox>
 
         </StackPanel>
