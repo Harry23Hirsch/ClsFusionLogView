@@ -7,11 +7,41 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="muh" 
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="24"
-                   FontFamily="Monsterrat"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding ClsLogFiles, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Jahr"
+                                    Width="50"
+                                    Binding="{Binding Year, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DataGridTextColumn Header="Monat"
+                                    Width="50"
+                                    Binding="{Binding Month, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DataGridTextColumn Header="Tag"
+                                    Width="50"
+                                    Binding="{Binding Day, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DataGridTextColumn Header="Zeit"
+                                    Width="80"
+                                    Binding="{Binding Time, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DataGridTextColumn Header="Text"
+                                    Width="470"
+                                    Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged}" />
+
+            </DataGrid.Columns>
+            
+        </DataGrid>
 
     </Grid>
 </UserControl>

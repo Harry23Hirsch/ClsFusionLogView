@@ -11,7 +11,7 @@
         Title="{Binding WindowTitle, UpdateSourceTrigger=PropertyChanged}"
         WindowStartupLocation="CenterScreen"
         Height="800"
-        Width="700"
+        Width="760"
         x:Name="MyMainWindow"
         FontFamily="Monsterrat"
         FontSize="14">

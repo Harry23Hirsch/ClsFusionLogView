@@ -1,11 +1,16 @@
 ﻿using ClsFusionViewer.Services;
+using InoTec;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 
 namespace ClsFusionViewer.ViewModels
 {
     public class BcsLogViewModel : BaseLogViewModel
     {
+        public ObservableCollection<BcsBatStatusInfo> BcsLogs => new ObservableCollection<BcsBatStatusInfo>(base.ClsStore.BcsLogFiles.ToList());
+
         public BcsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider) 
         {
                 

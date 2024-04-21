@@ -203,6 +203,8 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\IntToFloatConverter.cs" />
+    <Compile Include="Converters\UnixTicksToDateTimeConverter.cs" />
     <Compile Include="IoC\Helper.cs" />
     <Compile Include="Resources\Strings\WindowStrings.Designer.cs">
       <AutoGen>True</AutoGen>

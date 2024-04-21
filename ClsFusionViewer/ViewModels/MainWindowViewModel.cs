@@ -98,7 +98,6 @@ namespace ClsFusionViewer.ViewModels
             }
         }
 
-
         public MainWindowViewModel(IServiceProvider servicesProvider)
         {
             _serviceProvider = servicesProvider;
@@ -243,9 +242,9 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
 
-            _clsLogViewCommand.Execute(null);
-
             IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.SetStatusBarInfoText("Projekt geöffnet.");
+
+            _clsLogViewCommand.Execute(null);
 
             return true;
         }

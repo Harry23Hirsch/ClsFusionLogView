@@ -4,9 +4,91 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClsFusionViewer.Views"
+             xmlns:convert="clr-namespace:ClsFusionViewer.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <convert:UnixTicksToDateTimeConverter x:Key="UnixTicksToDateTime" />
+        <convert:IntToFloatConverter x:Key="IntToDouble" />
+    </UserControl.Resources>
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+
+            <StackPanel.Resources>
+
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Width"
+                            Value="200" />
+                    <Setter Property="Margin"
+                            Value="0 2 2 0" />
+                </Style>
+            </StackPanel.Resources>
             
+            <ComboBox x:Name="cb_LogFiles"
+                      ItemsSource="{Binding BcsLogs}">
+
+                <ComboBox.ItemTemplate>
+
+                    <DataTemplate DataType="{x:Type ComboBoxItem}">
+                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}}" />
+                    </DataTemplate>
+
+                </ComboBox.ItemTemplate>
+
+            </ComboBox>
+
+            <ComboBox x:Name="cb_Interval">
+
+                <ComboBox.ItemTemplate>
+
+                    <DataTemplate DataType="{x:Type ComboBoxItem}">
+                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}}" />
+                    </DataTemplate>
+
+                </ComboBox.ItemTemplate>
+
+
+            </ComboBox>
+
+        </StackPanel>
+
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding ElementName=cb_LogFiles, Path=SelectedItem.BcsBatStatus, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Header="Messzeitpunkt"
+                                    Binding="{Binding N, Converter={StaticResource UnixTicksToDateTime}}"
+                                    Width="170"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Kapazität (C)"
+                                    Binding="{Binding C}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Strom (I)"
+                                    Binding="{Binding I, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Block 1 (U)"
+                                    Binding="{Binding U.O, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+                
+                <DataGridTextColumn Header="Block 2 (U)"
+                                    Binding="{Binding U.T, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>
