@@ -17,6 +17,7 @@ namespace ClsFusionViewer.ViewModels
         private int _filterSelectedIndex;
         private BcsBatStatusInfoViewModel _bcsLogsSelectedItem;
         private int _bcsLogsSelectedIndex;
+        private BcsBatStatusInfoViewModel _bcsLogsLastSelectedItem;
 
         public ObservableCollection<BcsBatStatusInfoViewModel> BcsLogs 
         {
@@ -34,6 +35,21 @@ namespace ClsFusionViewer.ViewModels
             {
                 _bcsLogsSelectedItem = value;
                 OnPropertyChanged(nameof(BcsLogsSelectedItem));
+
+                if (_bcsLogsSelectedItem != null)
+                {
+                    _bcsLogsLastSelectedItem = _bcsLogsSelectedItem;
+                    OnPropertyChanged(nameof(BcsLogsLastSelectedItem));
+                }
+            }
+        }
+        public BcsBatStatusInfoViewModel BcsLogsLastSelectedItem
+        {
+            get => _bcsLogsLastSelectedItem;
+            set
+            {
+                _bcsLogsLastSelectedItem = value;
+                OnPropertyChanged(nameof(BcsLogsLastSelectedItem));
             }
         }
         public int BcsLogsSelectedIndex
@@ -85,7 +101,11 @@ namespace ClsFusionViewer.ViewModels
 
             _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(base.ClsStore_.BcsLogFiles
                 .Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
-            _bcsLogsSelectedItem = _bcsLogs.Last();
+
+            if (_bcsLogsLastSelectedItem != null && _bcsLogs.Count > 0)
+                _bcsLogsSelectedItem = _bcsLogsLastSelectedItem;
+            else
+                _bcsLogsSelectedItem= _bcsLogs.Last(); 
 
             BcsBatStatusInfoViewModel item = null;
 

@@ -54,6 +54,7 @@
             <ComboBox x:Name="cb_Filter"
                       ItemsSource="{Binding FilterList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding FilterSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding FilterSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                       Width="100"
                       HorizontalContentAlignment="Left"
                       VerticalContentAlignment="Center">
