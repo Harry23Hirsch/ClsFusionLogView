@@ -5,17 +5,15 @@ namespace ClsFusionViewer.ViewModels
 {
     public class StatusLogViewModel : BaseLogViewModel
     {
-        private readonly IServiceProvider _serviceProvider;
 
-        public StatusLogViewModel(IServiceProvider serviceProvider)
+        public StatusLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
             SetGlobals();
         }
 
         public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -23,7 +21,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.StatusLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
                 .SetStatusBarInfoText("");
         }
     }

@@ -12,8 +12,6 @@ namespace ClsFusionViewer.ViewModels
     public class BcsLogViewModel : BaseLogViewModel
     {
         private readonly string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
-        private readonly IServiceProvider _serviceProvider;
-        private readonly ClsStore _clsStore;
         private ObservableCollection<BcsBatStatusInfoViewModel> _bcsLogs;
         private string _filterSelectedItem;
         private int _filterSelectedIndex;
@@ -70,12 +68,10 @@ namespace ClsFusionViewer.ViewModels
             }
         }
 
-        public BcsLogViewModel(IServiceProvider serviceProvider)
+        public BcsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
-
-            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(_clsStore.BcsLogFiles.Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(base.ClsStore_.BcsLogFiles
+                .Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
             _filterSelectedItem = _filterList.First();
             
@@ -87,7 +83,8 @@ namespace ClsFusionViewer.ViewModels
             _bcsLogs.Clear();
             _bcsLogsSelectedItem = null;
 
-            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(_clsStore.BcsLogFiles.Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(base.ClsStore_.BcsLogFiles
+                .Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
 
             BcsBatStatusInfoViewModel item = null;
@@ -154,7 +151,7 @@ namespace ClsFusionViewer.ViewModels
         }
         public override void SetGlobals()
         {
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
                 .SetWindowTitle(
                     String.Format(
                         "{0} - {1}",
@@ -162,7 +159,7 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.BcsLogViewTitle)
                     );
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
                 .SetStatusBarInfoText("");
         }
     }
