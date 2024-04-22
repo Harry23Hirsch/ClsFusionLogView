@@ -220,6 +220,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BcsBatStatusInfo.cs" />
     <Compile Include="ViewModels\BcsLogViewModel.cs" />
+    <Compile Include="ViewModels\ClsLogFileLine.cs" />
     <Compile Include="ViewModels\ClsLogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\StatusLogViewModel.cs" />

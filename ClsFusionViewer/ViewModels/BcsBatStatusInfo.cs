@@ -5,19 +5,19 @@ namespace ClsFusionViewer.ViewModels
 {
     public class BcsBatStatusInfo
     {
-        private InoTec.BcsBatStatusInfo _model;
-        private ObservableCollection<BatStatus> _bcsBatStatus;
+        private InoTec.BcsBatStatusInfoType _model;
+        private ObservableCollection<BatStatusType> _bcsBatStatus;
 
         public BatInfo BcsBatInfo => _model.BcsBatInfo;
-        public ObservableCollection<BatStatus> BcsBatStatus
+        public ObservableCollection<BatStatusType> BcsBatStatus
         {
             get => _bcsBatStatus;
             set => _bcsBatStatus = value;
         }
-        public BcsBatStatusInfo(InoTec.BcsBatStatusInfo model)
+        public BcsBatStatusInfo(InoTec.BcsBatStatusInfoType model)
         {
             _model = model;
-            _bcsBatStatus = new ObservableCollection<BatStatus>(_model.BcsBatStatus);
+            _bcsBatStatus = new ObservableCollection<BatStatusType>(_model.BcsBatStatus);
         }
 
         public override bool Equals(object obj)

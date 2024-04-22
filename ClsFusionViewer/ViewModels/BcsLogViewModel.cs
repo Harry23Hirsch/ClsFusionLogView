@@ -143,13 +143,13 @@ namespace ClsFusionViewer.ViewModels
         }
         private BcsBatStatusInfo FilterBatStatus(BcsBatStatusInfo item, int timeStop)
         {
-            var result = new List<BatStatus>();
+            var result = new List<BatStatusType>();
             long temp = item.BcsBatStatus.First().N;
             long last = item.BcsBatStatus.Last().N;
 
             result.Add(item.BcsBatStatus.First());
 
-            foreach (BatStatus b in item.BcsBatStatus)
+            foreach (BatStatusType b in item.BcsBatStatus)
             {
                 if (b.N == last)
                 {
@@ -165,7 +165,7 @@ namespace ClsFusionViewer.ViewModels
                 }
             }
 
-            item.BcsBatStatus = new ObservableCollection<BatStatus>(result);
+            item.BcsBatStatus = new ObservableCollection<BatStatusType>(result);
 
             return item;
         }

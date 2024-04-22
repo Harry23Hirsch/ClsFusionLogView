@@ -9,15 +9,15 @@ namespace ClsFusionViewer.Stores
 {
     public class ClsStore
     {
-        private IEnumerable<IEnumerable<ClsLogFileLine>> _clsLogFiles;
-        private IEnumerable<BcsBatStatusInfo> _bcsLogFiles;
-        private IEnumerable<ClsFaultInfo> _clsStatusLogFiles;
+        private IEnumerable<IEnumerable<ClsLogFileLineType>> _clsLogFiles;
+        private IEnumerable<BcsBatStatusInfoType> _bcsLogFiles;
+        private IEnumerable<ClsFaultInfoType> _clsStatusLogFiles;
 
         public event Action ClsLogFiles_Changed;
         public event Action BcsLogFiles_Changed;
         public event Action ClsStatusLogFiles_Changed;
 
-        public IEnumerable<IEnumerable<ClsLogFileLine>> ClsLogFiles
+        public IEnumerable<IEnumerable<ClsLogFileLineType>> ClsLogFiles
         {
             get => _clsLogFiles;
             set
@@ -26,7 +26,7 @@ namespace ClsFusionViewer.Stores
                 OnClsLogFilesChanged();
             }
         }
-        public IEnumerable<BcsBatStatusInfo> BcsLogFiles
+        public IEnumerable<BcsBatStatusInfoType> BcsLogFiles
         {
             get => _bcsLogFiles;
             set
@@ -35,7 +35,7 @@ namespace ClsFusionViewer.Stores
                 OnBcsLogFilesChanged();
             }
         }
-        public IEnumerable<ClsFaultInfo> ClsStatusLogFiles
+        public IEnumerable<ClsFaultInfoType> ClsStatusLogFiles
         {
             get => _clsStatusLogFiles;
             set
