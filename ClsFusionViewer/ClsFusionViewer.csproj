@@ -218,7 +218,7 @@
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\BaseLogViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\BcsBatStatusInfoViewModel.cs" />
+    <Compile Include="ViewModels\BcsBatStatusInfo.cs" />
     <Compile Include="ViewModels\BcsLogViewModel.cs" />
     <Compile Include="ViewModels\ClsLogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

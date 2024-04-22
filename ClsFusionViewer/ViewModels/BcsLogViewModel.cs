@@ -12,14 +12,14 @@ namespace ClsFusionViewer.ViewModels
     public class BcsLogViewModel : BaseLogViewModel
     {
         private readonly string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
-        private ObservableCollection<BcsBatStatusInfoViewModel> _bcsLogs;
+        private ObservableCollection<BcsBatStatusInfo> _bcsLogs;
         private int _bcsLogsSelectedIndex;
-        private BcsBatStatusInfoViewModel _bcsLogsSelectedItem;
-        private BcsBatStatusInfoViewModel _bcsLogsLastSelectedItem;
+        private BcsBatStatusInfo _bcsLogsSelectedItem;
+        private BcsBatStatusInfo _bcsLogsLastSelectedItem;
         private string _filterSelectedItem;
         private int _filterSelectedIndex;
 
-        public ObservableCollection<BcsBatStatusInfoViewModel> BcsLogs 
+        public ObservableCollection<BcsBatStatusInfo> BcsLogs 
         {
             get => _bcsLogs;
             set
@@ -28,7 +28,7 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(BcsLogs));
             }
         }
-        public BcsBatStatusInfoViewModel BcsLogsSelectedItem
+        public BcsBatStatusInfo BcsLogsSelectedItem
         {
             get => _bcsLogsSelectedItem;
             set
@@ -43,7 +43,7 @@ namespace ClsFusionViewer.ViewModels
                 }
             }
         }
-        public BcsBatStatusInfoViewModel BcsLogsLastSelectedItem
+        public BcsBatStatusInfo BcsLogsLastSelectedItem
         {
             get => _bcsLogsLastSelectedItem;
             set
@@ -86,8 +86,8 @@ namespace ClsFusionViewer.ViewModels
 
         public BcsLogViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(base.ClsStore_.BcsLogFiles
-                .Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfo>(base.ClsStore_.BcsLogFiles
+                .Select(x => new BcsBatStatusInfo(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
             _filterSelectedItem = _filterList.First();
             
@@ -99,15 +99,15 @@ namespace ClsFusionViewer.ViewModels
             _bcsLogs.Clear();
             _bcsLogsSelectedItem = null;
 
-            _bcsLogs = new ObservableCollection<BcsBatStatusInfoViewModel>(base.ClsStore_.BcsLogFiles
-                .Select(x => new BcsBatStatusInfoViewModel(x)).ToList());
+            _bcsLogs = new ObservableCollection<BcsBatStatusInfo>(base.ClsStore_.BcsLogFiles
+                .Select(x => new BcsBatStatusInfo(x)).ToList());
 
             if (_bcsLogsLastSelectedItem != null)
                 _bcsLogsSelectedItem = _bcsLogsLastSelectedItem;
             else
                 _bcsLogsSelectedItem= _bcsLogs.Last(); 
 
-            BcsBatStatusInfoViewModel item = null;
+            BcsBatStatusInfo item = null;
 
             if (this.FilterSelectedItem.Equals(_filterList[1]))
             {
@@ -141,7 +141,7 @@ namespace ClsFusionViewer.ViewModels
 
             return;
         }
-        private BcsBatStatusInfoViewModel FilterBatStatus(BcsBatStatusInfoViewModel item, int timeStop)
+        private BcsBatStatusInfo FilterBatStatus(BcsBatStatusInfo item, int timeStop)
         {
             var result = new List<BatStatus>();
             long temp = item.BcsBatStatus.First().N;

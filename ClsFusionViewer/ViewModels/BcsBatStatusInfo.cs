@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace ClsFusionViewer.ViewModels
 {
-    public class BcsBatStatusInfoViewModel
+    public class BcsBatStatusInfo
     {
-        private BcsBatStatusInfo _model;
+        private InoTec.BcsBatStatusInfo _model;
         private ObservableCollection<BatStatus> _bcsBatStatus;
 
         public BatInfo BcsBatInfo => _model.BcsBatInfo;
@@ -14,7 +14,7 @@ namespace ClsFusionViewer.ViewModels
             get => _bcsBatStatus;
             set => _bcsBatStatus = value;
         }
-        public BcsBatStatusInfoViewModel(BcsBatStatusInfo model)
+        public BcsBatStatusInfo(InoTec.BcsBatStatusInfo model)
         {
             _model = model;
             _bcsBatStatus = new ObservableCollection<BatStatus>(_model.BcsBatStatus);
@@ -29,9 +29,9 @@ namespace ClsFusionViewer.ViewModels
                 return false;
 
 
-            return Equals((BcsBatStatusInfoViewModel)obj);
+            return Equals((BcsBatStatusInfo)obj);
         }
-        public bool Equals(BcsBatStatusInfoViewModel obj)
+        public bool Equals(BcsBatStatusInfo obj)
         {
             if (BcsBatInfo == null ||
                 obj.BcsBatInfo == null)
