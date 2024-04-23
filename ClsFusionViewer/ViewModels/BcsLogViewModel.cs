@@ -60,6 +60,7 @@ namespace ClsFusionViewer.ViewModels
             {
                 _bcsLogsSelectedIndex = value;
                 OnPropertyChanged(nameof(BcsLogsSelectedIndex));
+
             }
         }
         public string[] FilterList => _filterList;
@@ -91,27 +92,8 @@ namespace ClsFusionViewer.ViewModels
                 .Select(x => new BcsBatStatusInfo(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
             _filterSelectedItem = _filterList.First();
-
-            PropertyChanged += OnPropChanged;
             
             SetGlobals();
-        }
-
-        private void OnPropChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(BcsLogsSelectedItem) || 
-                e.PropertyName == nameof(FilterSelectedItem) ||
-                e.PropertyName == nameof(BcsLogs))
-            {
-                if (_bcsLogsSelectedItem != null)
-                {
-                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                        .SetStatusBarInfoText(
-                            String.Format(
-                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-                                _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
-                }
-            }
         }
 
         private void FilterLogFiles()
@@ -190,6 +172,21 @@ namespace ClsFusionViewer.ViewModels
             return item;
         }
 
+        public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(BcsLogsSelectedItem) || 
+                e.PropertyName == nameof(FilterSelectedItem))
+            {
+                if (this.BcsLogsSelectedItem != null)
+                {
+                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
+                }
+            }
+        }
         public override void SetGlobals()
         {
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?

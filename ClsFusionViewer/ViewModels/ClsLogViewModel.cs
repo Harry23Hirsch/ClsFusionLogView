@@ -76,28 +76,9 @@ namespace ClsFusionViewer.ViewModels
             _isClsMonthEnabled = true;
             _clsLogMonth = new ObservableCollection<string>();
 
-            PropertyChanged += OnPropChanged;
-
             this.ClsLogFileSelectedItem = "Alle";
 
             SetGlobals();
-        }
-
-        private void OnPropChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ClsLogFileSelectedItem) ||
-                e.PropertyName == nameof(ClsLogMonthSelectedItem) || 
-                e.PropertyName == nameof(ClsLogLines))
-            {
-                if (_clsLogFileSelectedItem != null)
-                {
-                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                        .SetStatusBarInfoText(
-                            String.Format(
-                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-                                _clsLogLines?.Count));
-                }
-            }
         }
 
         private ObservableCollection<string> MapLogs(IEnumerable<IEnumerable<ClsLogFileLineType>> logs)
@@ -164,14 +145,12 @@ namespace ClsFusionViewer.ViewModels
                 }
 
                 resuInt.Sort();
-                resuInt.Reverse();
-
                 resu.AddRange(resuInt.Select(x => x.ToString()));
                 resu.Add("Alle");
                 resu.Reverse();
 
                 _clsLogMonth = new ObservableCollection<string>(resu);
-                this.ClsLogMonthSelectedItem = _clsLogMonth.First();
+                _clsLogMonthSelectedItem = _clsLogMonth.First();
             }
 
             OnPropertyChanged(nameof(ClsLogMonth));
@@ -217,6 +196,20 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(ClsLogLines));
         }
 
+        public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ClsLogLines))
+            {
+                if (_clsLogFileSelectedItem != null)
+                {
+                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _clsLogLines?.Count));
+                }
+            }
+        }
         public override void SetGlobals()
         {
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?

@@ -7,6 +7,7 @@ using ClsFusionViewer.Commands;
 using ClsFusionViewer.Stores;
 using System.Linq;
 using System.IO;
+using System.ComponentModel;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -33,7 +34,7 @@ namespace ClsFusionViewer.ViewModels
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
         public ICommand CloseProjectCommand => _closeProjectCommand;
-        public ICommand ClsLogViewCommand => new NavigateCommand(new NavigationService(_navigationStore, CreateClsLogViewModel));
+        public ICommand ClsLogViewCommand => _clsLogViewCommand;
         public ICommand BcsLogViewCommand => _bcsLogViewCommand;
         public ICommand StatusLogViewCommand => _statusLogViewCommand;
 
@@ -111,6 +112,8 @@ namespace ClsFusionViewer.ViewModels
 
             _clsStore = IoC.Helper.GetScopedService<ClsStore>(servicesProvider);
 
+            PropertyChanged += PropChanged;
+
             _openCommand = new RelayCommand<object>(OpenProjectCommand_Execute, OpenProjectCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
             _closeProjectCommand = new RelayCommand<object>(CloseProjectCommand_Execute, CloseProjectCommand_CanExecute);
@@ -120,6 +123,16 @@ namespace ClsFusionViewer.ViewModels
             _statusLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateStatusLogViewModel));
 
             _projectLoaded = false;
+        }
+
+        private void PropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ProjectLoaded))
+            {
+                if (!ProjectLoaded)
+                    IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+                        .SetStatusBarInfoText("Projekt geschlossen.");
+            }
         }
 
         private BaseViewModel CreateStatusLogViewModel()
@@ -158,7 +171,6 @@ namespace ClsFusionViewer.ViewModels
                 _projectLoaded = true;
                 OnPropertyChanged(nameof(ProjectLoaded));
             }
-
         }
         private bool OpenProjectCommand_CanExecute(object obj)
         {
@@ -169,8 +181,7 @@ namespace ClsFusionViewer.ViewModels
             _projectLoaded = false;
             OnPropertyChanged(nameof(ProjectLoaded));
 
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
-                .SetStatusBarInfoText("Projekt geschlossen.");
+            
         }
         private bool CloseProjectCommand_CanExecute(object obj)
         {
@@ -241,8 +252,6 @@ namespace ClsFusionViewer.ViewModels
                 _statusLogEnabled = false;
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
-
-            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.SetStatusBarInfoText("Projekt geöffnet.");
 
             _clsLogViewCommand.Execute(null);
 

@@ -1,5 +1,6 @@
 ﻿using ClsFusionViewer.Stores;
 using System;
+using System.ComponentModel;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -15,8 +16,11 @@ namespace ClsFusionViewer.ViewModels
         {
             _serviceProvider = serviceProvider;
             _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
+
+            PropertyChanged += OnPropChanged;
         }
 
+        public abstract void OnPropChanged(object sender, PropertyChangedEventArgs e);
         public abstract void SetGlobals();
     }
 }

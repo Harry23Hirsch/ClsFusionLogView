@@ -1,5 +1,6 @@
 ﻿using ClsFusionViewer.Services;
 using System;
+using System.ComponentModel;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -11,6 +12,10 @@ namespace ClsFusionViewer.ViewModels
             SetGlobals();
         }
 
+        public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+        }
         public override void SetGlobals()
         {
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
