@@ -41,12 +41,6 @@ namespace ClsFusionViewer.ViewModels
                     _bcsLogsLastSelectedItem = _bcsLogsSelectedItem;
                     OnPropertyChanged(nameof(BcsLogsLastSelectedItem));
                 }
-
-                IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                    .SetStatusBarInfoText(
-                        String.Format(
-                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-                            _bcsLogs.Count));
             }
         }
         public BcsBatStatusInfo BcsLogsLastSelectedItem
@@ -77,8 +71,6 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(FilterSelectedItem));
 
                 FilterLogFiles();
-
-                
             }
         }
         public int FilterSelectedIndex
@@ -183,6 +175,7 @@ namespace ClsFusionViewer.ViewModels
 
             return item;
         }
+
         public override void SetGlobals()
         {
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
