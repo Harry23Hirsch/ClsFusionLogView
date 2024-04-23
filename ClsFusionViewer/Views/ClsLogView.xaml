@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:ClsFusionViewer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -13,8 +18,39 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+
+            <StackPanel.Resources>
+
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Width"
+                            Value="200" />
+                    <Setter Property="Margin"
+                            Value="0 2 2 0" />
+                </Style>
+                
+            </StackPanel.Resources>
+
+            <ComboBox x:Name="cb_LogFileYear"
+                      Width="100"
+                      ItemsSource="{Binding ClsLogFiles, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding ClsLogFileSelectedItem, UpdateSourceTrigger=PropertyChanged}">
+
+            </ComboBox>
+
+            <ComboBox x:Name="cb_LogFileMonth"
+                      Width="100"
+                      ItemsSource="{Binding ClsLogMonth, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding ClsLogMonthSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding IsClsMonthEnabled, UpdateSourceTrigger=PropertyChanged}">
+                
+            </ComboBox>
+
+        </StackPanel>
+        
         <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding ClsLogFiles, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding ClsLogLines, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False">
 
             <DataGrid.Columns>
