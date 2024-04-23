@@ -4,6 +4,7 @@ using InoTec;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 
@@ -90,8 +91,27 @@ namespace ClsFusionViewer.ViewModels
                 .Select(x => new BcsBatStatusInfo(x)).ToList());
             _bcsLogsSelectedItem = _bcsLogs.Last();
             _filterSelectedItem = _filterList.First();
+
+            PropertyChanged += OnPropChanged;
             
             SetGlobals();
+        }
+
+        private void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(BcsLogsSelectedItem) || 
+                e.PropertyName == nameof(FilterSelectedItem) ||
+                e.PropertyName == nameof(BcsLogs))
+            {
+                if (_bcsLogsSelectedItem != null)
+                {
+                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
+                }
+            }
         }
 
         private void FilterLogFiles()
@@ -139,12 +159,6 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(BcsLogs));
             OnPropertyChanged(nameof(BcsLogsSelectedItem));
 
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                    .SetStatusBarInfoText(
-                        String.Format(
-                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-                            _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
-
             return;
         }
         private BcsBatStatusInfo FilterBatStatus(BcsBatStatusInfo item, int timeStop)
@@ -187,10 +201,10 @@ namespace ClsFusionViewer.ViewModels
                     );
 
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                    .SetStatusBarInfoText(
-                        String.Format(
-                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-                            _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
         }
     }
 }

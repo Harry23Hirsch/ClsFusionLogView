@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Windows.Forms;
@@ -75,9 +76,28 @@ namespace ClsFusionViewer.ViewModels
             _isClsMonthEnabled = true;
             _clsLogMonth = new ObservableCollection<string>();
 
+            PropertyChanged += OnPropChanged;
+
             this.ClsLogFileSelectedItem = "Alle";
 
             SetGlobals();
+        }
+
+        private void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ClsLogFileSelectedItem) ||
+                e.PropertyName == nameof(ClsLogMonthSelectedItem) || 
+                e.PropertyName == nameof(ClsLogLines))
+            {
+                if (_clsLogFileSelectedItem != null)
+                {
+                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _clsLogLines?.Count));
+                }
+            }
         }
 
         private ObservableCollection<string> MapLogs(IEnumerable<IEnumerable<ClsLogFileLineType>> logs)
@@ -157,13 +177,6 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(ClsLogMonth));
             OnPropertyChanged(nameof(ClsLogMonthSelectedItem));
             OnPropertyChanged(nameof(IsClsMonthEnabled));
-
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                    .SetStatusBarInfoText(
-                        String.Format(
-                            Resources.Strings.FormatedStrings.LogEntriesFound,
-                            _clsLogLines.Count));
-
         }
         private void MapLogMonth()
         {
@@ -202,12 +215,6 @@ namespace ClsFusionViewer.ViewModels
 
             _clsLogLines = new ObservableCollection<ClsLogFileLine>(result);
             OnPropertyChanged(nameof(ClsLogLines));
-
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                    .SetStatusBarInfoText(
-                        String.Format(
-                            Resources.Strings.FormatedStrings.LogEntriesFound,
-                            _clsLogLines.Count));
         }
 
         public override void SetGlobals()
@@ -219,6 +226,12 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.DefaultTitle,
                         Resources.Strings.WindowStrings.ClsLogViewTitle)
                     );
+
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.LogEntriesFound,
+                            _clsLogLines.Count));
         }
     }
 }
