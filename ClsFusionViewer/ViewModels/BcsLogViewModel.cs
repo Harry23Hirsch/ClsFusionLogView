@@ -41,6 +41,12 @@ namespace ClsFusionViewer.ViewModels
                     _bcsLogsLastSelectedItem = _bcsLogsSelectedItem;
                     OnPropertyChanged(nameof(BcsLogsLastSelectedItem));
                 }
+
+                IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                            _bcsLogs.Count));
             }
         }
         public BcsBatStatusInfo BcsLogsLastSelectedItem
@@ -71,6 +77,8 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(FilterSelectedItem));
 
                 FilterLogFiles();
+
+                
             }
         }
         public int FilterSelectedIndex
@@ -139,6 +147,12 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(BcsLogs));
             OnPropertyChanged(nameof(BcsLogsSelectedItem));
 
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                            _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
+
             return;
         }
         private BcsBatStatusInfo FilterBatStatus(BcsBatStatusInfo item, int timeStop)
@@ -180,7 +194,10 @@ namespace ClsFusionViewer.ViewModels
                     );
 
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                .SetStatusBarInfoText("");
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                            _bcsLogs[_bcsLogs.IndexOf(_bcsLogsSelectedItem)].BcsBatStatus.Count));
         }
     }
 }

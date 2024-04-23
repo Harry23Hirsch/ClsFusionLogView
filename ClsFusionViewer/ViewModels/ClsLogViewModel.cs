@@ -1,6 +1,7 @@
 ﻿using ClsFusionViewer.Services;
 using ClsFusionViewer.Stores;
 using InoTec;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,7 +32,6 @@ namespace ClsFusionViewer.ViewModels
                 MapLogYear();
             }
         }
-
         public ObservableCollection<string> ClsLogMonth
         {
             get => _clsLogMonth;
@@ -74,6 +74,7 @@ namespace ClsFusionViewer.ViewModels
         {
             _isClsMonthEnabled = true;
             _clsLogMonth = new ObservableCollection<string>();
+
             this.ClsLogFileSelectedItem = "Alle";
 
             SetGlobals();
@@ -127,25 +128,25 @@ namespace ClsFusionViewer.ViewModels
                 _clsLogMonth.Clear();
 
                 var resu = new List<string>();
-                
+                var resuInt = new List<int>();
 
                 foreach (IEnumerable<ClsLogFileLineType> log in storeLogFiles)
                 {
-
                     var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
                     foreach (ClsLogFileLine line in fu)
                     {
-                        if (line.Year == _clsLogFileSelectedItem)
+                        if (line.Year == int.Parse(_clsLogFileSelectedItem))
                         {
-                            resu.Add(line.Month);
+                            resuInt.Add(line.Month);
                             break;
                         }
                     }
-                    
                 }
 
-                resu.Sort();
-                resu.Reverse();
+                resuInt.Sort();
+                resuInt.Reverse();
+
+                resu.AddRange(resuInt.Select(x => x.ToString()));
                 resu.Add("Alle");
                 resu.Reverse();
 
@@ -156,32 +157,59 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(ClsLogMonth));
             OnPropertyChanged(nameof(ClsLogMonthSelectedItem));
             OnPropertyChanged(nameof(IsClsMonthEnabled));
+
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.LogEntriesFound,
+                            _clsLogLines.Count));
+
         }
         private void MapLogMonth()
         {
-            if (!string.IsNullOrEmpty(_clsLogMonthSelectedItem) && _clsLogMonthSelectedItem.Equals("Alle"))
+            _clsLogLines.Clear();
+
+            var result = new List<ClsLogFileLine>();
+
+            foreach (IEnumerable<ClsLogFileLineType> log in base.ClsStore_.ClsLogFiles)
             {
-                _clsLogLines.Clear();
 
-                var result = new ObservableCollection<ClsLogFileLine>();
-
-                foreach (IEnumerable<ClsLogFileLineType> log in base.ClsStore_.ClsLogFiles)
+                var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
+                foreach (ClsLogFileLine line in fu)
                 {
+                    if (line is null)
+                        continue;
 
-                    var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
-                    foreach (ClsLogFileLine line in fu)
+                    if (_clsLogMonthSelectedItem is null)
+                        continue;
+
+                    if (_clsLogMonthSelectedItem.Equals("Alle"))
                     {
-                        if (line.Month == _clsLogMonthSelectedItem)
-                        {
+                        if (line.Year == int.Parse(_clsLogFileSelectedItem))
                             result.Add(line);
-                        }
+                    }
+                    else
+                    {
+                        if (line.Year == int.Parse(_clsLogFileSelectedItem) && 
+                            line.Month == int.Parse(_clsLogMonthSelectedItem))
+                            result.Add(line);
                     }
                 }
-
-                _clsLogLines = new ObservableCollection<ClsLogFileLine>(new ObservableCollection<ClsLogFileLine>(result).Reverse().ToList());
-                OnPropertyChanged(nameof(ClsLogLines));
             }
+
+            result.Sort();
+            result.Reverse();
+
+            _clsLogLines = new ObservableCollection<ClsLogFileLine>(result);
+            OnPropertyChanged(nameof(ClsLogLines));
+
+            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                    .SetStatusBarInfoText(
+                        String.Format(
+                            Resources.Strings.FormatedStrings.LogEntriesFound,
+                            _clsLogLines.Count));
         }
+
         public override void SetGlobals()
         {
             IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
@@ -191,11 +219,6 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.DefaultTitle,
                         Resources.Strings.WindowStrings.ClsLogViewTitle)
                     );
-
-            IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-                .SetStatusBarInfoText($"CLS Log-Einträge gefunden: {this.ClsLogFiles.Count}");
         }
-
-
     }
 }

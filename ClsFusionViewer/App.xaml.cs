@@ -25,9 +25,9 @@ namespace ClsFusionViewer
                     services.AddSingleton<NavigationService>();
                     services.AddTransient<InterActionServices>();
 
-                    services.AddTransient<ClsLogViewModel>();
-                    services.AddTransient<BcsLogViewModel>();
-                    services.AddTransient<StatusLogViewModel>();
+                    services.AddSingleton<ClsLogViewModel>();
+                    services.AddSingleton<BcsLogViewModel>();
+                    services.AddSingleton<StatusLogViewModel>();
 
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddSingleton(s => new MainWindow

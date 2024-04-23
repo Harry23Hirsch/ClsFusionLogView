@@ -206,6 +206,11 @@
     <Compile Include="Converters\IntToFloatConverter.cs" />
     <Compile Include="Converters\UnixTicksToDateTimeConverter.cs" />
     <Compile Include="IoC\Helper.cs" />
+    <Compile Include="Resources\Strings\FormatedStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormatedStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Strings\WindowStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,6 +286,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\FormatedStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormatedStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings\WindowStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WindowStrings.Designer.cs</LastGenOutput>
@@ -294,9 +303,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\InoTec\InoTec\InoTec.csproj">
       <Project>{65b7a229-5a24-493d-8300-eb44af3a1b49}</Project>

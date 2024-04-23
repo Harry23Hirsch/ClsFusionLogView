@@ -33,7 +33,7 @@ namespace ClsFusionViewer.ViewModels
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
         public ICommand CloseProjectCommand => _closeProjectCommand;
-        public ICommand ClsLogViewCommand => _clsLogViewCommand;
+        public ICommand ClsLogViewCommand => new NavigateCommand(new NavigationService(_navigationStore, CreateClsLogViewModel));
         public ICommand BcsLogViewCommand => _bcsLogViewCommand;
         public ICommand StatusLogViewCommand => _statusLogViewCommand;
 
@@ -124,18 +124,18 @@ namespace ClsFusionViewer.ViewModels
 
         private BaseViewModel CreateStatusLogViewModel()
         {
-            return IoC.Helper.GetScopedService<StatusLogViewModel>(_serviceProvider);
+            return new StatusLogViewModel(_serviceProvider);
         }
         private BaseViewModel CreateBcsLogViewModel()
         {
-            return IoC.Helper.GetScopedService<BcsLogViewModel>(_serviceProvider);
+            return new BcsLogViewModel(_serviceProvider);
         }
         private BaseViewModel CreateClsLogViewModel()
         {
-
             _clsLogIsChecked = true;
             OnPropertyChanged(nameof(ClsLogIsChecked));
-            return IoC.Helper.GetScopedService<ClsLogViewModel>(_serviceProvider);
+
+            return new ClsLogViewModel(_serviceProvider);
         }
 
         private void NavigationStore_CurrentViewModel_Changed()
