@@ -48,7 +48,8 @@ namespace ClsFusionViewer.ViewModels
             set
             {
                 _clsLogMonthSelectedItem = value;
-                
+                OnPropertyChanged(nameof(ClsLogMonthSelectedItem));
+
                 MapLogMonth();
             }
         }
@@ -163,6 +164,7 @@ namespace ClsFusionViewer.ViewModels
 
             var result = new List<ClsLogFileLine>();
 
+
             foreach (IEnumerable<ClsLogFileLineType> log in base.ClsStore_.ClsLogFiles)
             {
 
@@ -198,7 +200,9 @@ namespace ClsFusionViewer.ViewModels
 
         public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ClsLogLines))
+            if (e.PropertyName == nameof(ClsLogLines) ||
+                e.PropertyName == nameof(ClsLogFileSelectedItem) ||
+                e.PropertyName == nameof(ClsLogMonthSelectedItem))
             {
                 if (_clsLogFileSelectedItem != null)
                 {
