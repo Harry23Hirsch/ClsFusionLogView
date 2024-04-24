@@ -126,10 +126,16 @@
   <data name="DefaultTitle" xml:space="preserve">
     <value>CLS Fusion Log View</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>m.szmajduch@protonmail.com</value>
+  </data>
   <data name="InfoTitle" xml:space="preserve">
     <value>Info</value>
   </data>
   <data name="StatusLogViewTitle" xml:space="preserve">
     <value>CLS Status Log</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>https://github.com/Harry23Hirsch/ClsFusionViewer</value>
   </data>
 </root>

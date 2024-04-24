@@ -38,7 +38,7 @@ namespace ClsFusionViewer.Services
         {
             var info = new InfoView();
             info.DataContext = new InfoViewModel();
-            info.Show();
+            info.ShowDialog();
         }
 
         public void SetWindowTitle(string text)

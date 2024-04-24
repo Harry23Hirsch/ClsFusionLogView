@@ -88,6 +88,15 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die m.szmajduch@protonmail.com ähnelt.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Info ähnelt.
         /// </summary>
         internal static string InfoTitle {
@@ -102,6 +111,15 @@ namespace ClsFusionViewer.Resources.Strings {
         internal static string StatusLogViewTitle {
             get {
                 return ResourceManager.GetString("StatusLogViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die https://github.com/Harry23Hirsch/ClsFusionViewer ähnelt.
+        /// </summary>
+        internal static string Url {
+            get {
+                return ResourceManager.GetString("Url", resourceCulture);
             }
         }
     }
