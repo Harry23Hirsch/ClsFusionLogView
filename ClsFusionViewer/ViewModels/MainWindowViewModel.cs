@@ -8,6 +8,7 @@ using ClsFusionViewer.Stores;
 using System.Linq;
 using System.IO;
 using System.ComponentModel;
+using ClsFusionViewer.Views;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -30,6 +31,7 @@ namespace ClsFusionViewer.ViewModels
         private readonly ICommand _clsLogViewCommand;
         private readonly ICommand _bcsLogViewCommand;
         private readonly ICommand _statusLogViewCommand;
+        private readonly ICommand _openInfoCommand;
 
         public ICommand OpenCommand => _openCommand;
         public ICommand CloseCommand => _closeCommand;
@@ -37,6 +39,7 @@ namespace ClsFusionViewer.ViewModels
         public ICommand ClsLogViewCommand => _clsLogViewCommand;
         public ICommand BcsLogViewCommand => _bcsLogViewCommand;
         public ICommand StatusLogViewCommand => _statusLogViewCommand;
+        public ICommand OpenInfoCommand => _openInfoCommand;
 
         public BaseViewModel CurrentViewModel
         {
@@ -117,6 +120,7 @@ namespace ClsFusionViewer.ViewModels
             _openCommand = new RelayCommand<object>(OpenProjectCommand_Execute, OpenProjectCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
             _closeProjectCommand = new RelayCommand<object>(CloseProjectCommand_Execute, CloseProjectCommand_CanExecute);
+            _openInfoCommand = new RelayCommand<object>(OpenInfoCommand_Execute);
 
             _clsLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateClsLogViewModel));
             _bcsLogViewCommand = new NavigateCommand(new NavigationService(_navigationStore, CreateBcsLogViewModel));
@@ -193,6 +197,11 @@ namespace ClsFusionViewer.ViewModels
             var mw = (MainWindow)obj;
             if (mw !=  null)
                 mw.Close();
+        }
+        private void OpenInfoCommand_Execute(object obj)
+        {
+            IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+                .OpenInfoView();
         }
 
         private bool Test()

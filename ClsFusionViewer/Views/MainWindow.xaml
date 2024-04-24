@@ -47,7 +47,8 @@
             </MenuItem>
 
             <MenuItem Header="_Hilfe">
-                <MenuItem Header="_Info" />
+                <MenuItem Header="_Info" 
+                          Command="{Binding OpenInfoCommand, UpdateSourceTrigger=PropertyChanged}"/>
             </MenuItem>
         </Menu>
 

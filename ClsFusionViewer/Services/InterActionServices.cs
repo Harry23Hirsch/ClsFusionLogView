@@ -1,4 +1,6 @@
 ﻿using ClsFusionViewer.Stores;
+using ClsFusionViewer.ViewModels;
+using ClsFusionViewer.Views;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows;
 
@@ -31,6 +33,12 @@ namespace ClsFusionViewer.Services
             {
                 return string.Empty;
             }
+        }
+        public void OpenInfoView()
+        {
+            var info = new InfoView();
+            info.DataContext = new InfoViewModel();
+            info.Show();
         }
 
         public void SetWindowTitle(string text)

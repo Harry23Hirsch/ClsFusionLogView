@@ -228,6 +228,7 @@
     <Compile Include="ViewModels\ClsLogFile.cs" />
     <Compile Include="ViewModels\ClsLogFileLine.cs" />
     <Compile Include="ViewModels\ClsLogViewModel.cs" />
+    <Compile Include="ViewModels\InfoViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\StatusLogViewModel.cs" />
     <Compile Include="Views\BcsLogView.xaml.cs">
@@ -236,10 +237,17 @@
     <Compile Include="Views\ClsLogView.xaml.cs">
       <DependentUpon>ClsLogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InfoView.xaml.cs">
+      <DependentUpon>InfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatusLogView.xaml.cs">
       <DependentUpon>StatusLogView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\BcsLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

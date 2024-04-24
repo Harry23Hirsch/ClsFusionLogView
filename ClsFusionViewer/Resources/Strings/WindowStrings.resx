@@ -126,6 +126,9 @@
   <data name="DefaultTitle" xml:space="preserve">
     <value>CLS Fusion Log View</value>
   </data>
+  <data name="InfoTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
   <data name="StatusLogViewTitle" xml:space="preserve">
     <value>CLS Status Log</value>
   </data>
