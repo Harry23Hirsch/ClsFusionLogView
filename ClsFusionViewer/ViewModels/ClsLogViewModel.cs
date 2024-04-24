@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.RightsManagement;
 using System.Windows.Forms;
 using System.Windows.Shapes;
@@ -122,38 +123,32 @@ namespace ClsFusionViewer.ViewModels
                     }
                 }
 
-                _clsLogLines = new ObservableCollection<ClsLogFileLine>(result.Reverse().ToList());
-                OnPropertyChanged(nameof(ClsLogLines));
+                _clsLogLines = new ObservableCollection<ClsLogFileLine>(result.Reverse());
             }
             else
             {
                 _clsLogMonth.Clear();
 
-                var resultMonthString = new List<string>();
                 var resultMonthInt = new List<int>();
                 var resultLogLines =  new List<ClsLogFileLine>();
 
                 foreach (IEnumerable<ClsLogFileLineType> log in storeLogFiles)
                 {
-                    var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
-
-                    if (fu[0].Year != int.Parse(_clsLogFileSelectedItem))
-                        continue;
-                    
-                    resultLogLines.AddRange(fu);
-
-                    foreach (ClsLogFileLine line in fu)
+                    foreach (ClsLogFileLineType logLine in log)
                     {
-                        if (line.Year == int.Parse(_clsLogFileSelectedItem))
+                        if (logLine.Year == _clsLogFileSelectedItem)
                         {
-                            resultMonthInt.Add(line.Month);
-                            break;
+                            resultLogLines.Add(new ClsLogFileLine(logLine));
+
+                            if (!resultMonthInt.Contains(int.Parse(logLine.Month)))
+                                resultMonthInt.Add(int.Parse(logLine.Month));
                         }
-                    }
+                    }   
                 }
 
                 resultMonthInt.Sort();
 
+                var resultMonthString = new List<string>();
                 resultMonthString.AddRange(resultMonthInt.Select(x => x.ToString()));
                 resultMonthString.Add("Alle");
                 resultMonthString.Reverse();
@@ -166,10 +161,10 @@ namespace ClsFusionViewer.ViewModels
                 _clsLogLines = new ObservableCollection<ClsLogFileLine>(resultLogLines);
             }
 
+            OnPropertyChanged(nameof(ClsLogLines));
             OnPropertyChanged(nameof(ClsLogMonth));
             OnPropertyChanged(nameof(ClsLogMonthSelectedItem));
             OnPropertyChanged(nameof(IsClsMonthEnabled));
-            OnPropertyChanged(nameof(ClsLogLines));
         }
         private void MapLogMonth()
         {
