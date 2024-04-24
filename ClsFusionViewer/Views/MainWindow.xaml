@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
         xmlns:vm="clr-namespace:ClsFusionViewer.ViewModels"
         xmlns:view="clr-namespace:ClsFusionViewer.Views"
         
@@ -126,9 +127,15 @@
                                 <DataTemplate DataType="{x:Type vm:ClsLogViewModel}">
                                     <view:ClsLogView />
                                 </DataTemplate>
+                                
                                 <DataTemplate DataType="{x:Type vm:BcsLogViewModel}">
                                     <view:BcsLogView />
                                 </DataTemplate>
+                                
+                                <DataTemplate DataType="{x:Type vm:BcsLogViewModel_}">
+                                    <view:BcsLogView_ />
+                                </DataTemplate>
+                                
                                 <DataTemplate DataType="{x:Type vm:StatusLogViewModel}">
                                     <view:StatusLogView />
                                 </DataTemplate>
