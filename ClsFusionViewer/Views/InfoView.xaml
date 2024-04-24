@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClsFusionViewer.Views"
+        xmlns:resx="clr-namespace:ClsFusionViewer.Resources.Strings"
+        
         mc:Ignorable="d"
         Title="{Binding InfoTitle, UpdateSourceTrigger=PropertyChanged}" 
         Height="210" Width="320"
@@ -64,19 +66,35 @@
                    Margin="10"
                    Style="{StaticResource BTB}" />
 
-        <TextBlock Grid.Row="2"
+        <TextBlock x:Name="tb_Url"
+                   Grid.Row="2"
                    Text="{Binding Url, UpdateSourceTrigger=PropertyChanged}"
                    FontSize="12"
                    Margin="10"
-                   Style="{StaticResource TBS}">
-            
+                   Style="{StaticResource TBS}"
+                   ToolTip="{Binding ToolTip, UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding CopyToClipboard}"
+                              CommandParameter="{Binding ElementName=tb_Url, Path=Text}"
+                              MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+
         </TextBlock>
 
-        <TextBlock Grid.Row="3"
+        <TextBlock x:Name="tb_Email"
+                   Grid.Row="3"
                    Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                    FontSize="12"
                    Margin="10"
-                   Style="{StaticResource TBS}">
+                   Style="{StaticResource TBS}"
+                   ToolTip="{Binding ToolTip, UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding CopyToClipboard}"
+                              CommandParameter="{Binding ElementName=tb_Email, Path=Text}"
+                              MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
 
         </TextBlock>
 

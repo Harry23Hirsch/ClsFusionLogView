@@ -129,11 +129,23 @@
   <data name="Email" xml:space="preserve">
     <value>m.szmajduch@protonmail.com</value>
   </data>
+  <data name="EmailCopied" xml:space="preserve">
+    <value>Email kopiert</value>
+  </data>
   <data name="InfoTitle" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="LinkCopied" xml:space="preserve">
+    <value>Link kopiert</value>
+  </data>
+  <data name="ProjectClosed" xml:space="preserve">
+    <value>Projekt geschlossen</value>
+  </data>
   <data name="StatusLogViewTitle" xml:space="preserve">
     <value>CLS Status Log</value>
+  </data>
+  <data name="ToolTipInfoLink" xml:space="preserve">
+    <value>Klicken zum kopieren</value>
   </data>
   <data name="Url" xml:space="preserve">
     <value>https://github.com/Harry23Hirsch/ClsFusionViewer</value>

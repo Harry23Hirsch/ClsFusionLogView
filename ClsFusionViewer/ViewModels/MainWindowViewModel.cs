@@ -1,14 +1,11 @@
 ﻿using InoTec;
-using System.Collections.Generic;
 using System;
 using ClsFusionViewer.Services;
 using System.Windows.Input;
 using ClsFusionViewer.Commands;
 using ClsFusionViewer.Stores;
 using System.Linq;
-using System.IO;
 using System.ComponentModel;
-using ClsFusionViewer.Views;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -115,7 +112,7 @@ namespace ClsFusionViewer.ViewModels
 
             _clsStore = IoC.Helper.GetScopedService<ClsStore>(servicesProvider);
 
-            PropertyChanged += PropChanged;
+            PropertyChanged += PropertyChanged_;
 
             _openCommand = new RelayCommand<object>(OpenProjectCommand_Execute, OpenProjectCommand_CanExecute);
             _closeCommand = new RelayCommand<object>(CloseCommand_Execute);
@@ -129,13 +126,13 @@ namespace ClsFusionViewer.ViewModels
             _projectLoaded = false;
         }
 
-        private void PropChanged(object sender, PropertyChangedEventArgs e)
+        private void PropertyChanged_(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ProjectLoaded))
             {
                 if (!ProjectLoaded)
                     IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
-                        .SetStatusBarInfoText("Projekt geschlossen.");
+                        .SetStatusBarInfoText(Resources.Strings.WindowStrings.ProjectClosed);
             }
         }
 

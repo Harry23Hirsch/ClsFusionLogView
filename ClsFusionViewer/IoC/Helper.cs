@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Windows;
 
 namespace ClsFusionViewer.IoC
 {
@@ -11,6 +12,10 @@ namespace ClsFusionViewer.IoC
             {
                 return scope.ServiceProvider.GetService<T>();
             }
+        }
+        public static void CopyToClipboard(string s)
+        {
+            Clipboard.SetText(s);
         }
     }
 }

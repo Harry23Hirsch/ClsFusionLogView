@@ -17,10 +17,10 @@ namespace ClsFusionViewer.ViewModels
             _serviceProvider = serviceProvider;
             _clsStore = IoC.Helper.GetScopedService<ClsStore>(serviceProvider);
 
-            PropertyChanged += OnPropChanged;
+            PropertyChanged += PropertyChanged_;
         }
 
-        public abstract void OnPropChanged(object sender, PropertyChangedEventArgs e);
+        public abstract void PropertyChanged_(object sender, PropertyChangedEventArgs e);
         public abstract void SetGlobals();
     }
 }

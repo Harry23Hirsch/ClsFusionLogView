@@ -1,16 +1,10 @@
 ﻿using ClsFusionViewer.Services;
-using ClsFusionViewer.Stores;
 using InoTec;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.RightsManagement;
-using System.Windows.Forms;
-using System.Windows.Shapes;
 
 namespace ClsFusionViewer.ViewModels
 {
@@ -204,7 +198,7 @@ namespace ClsFusionViewer.ViewModels
             OnPropertyChanged(nameof(ClsLogLines));
         }
 
-        public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        public override void PropertyChanged_(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ClsLogLines) ||
                 e.PropertyName == nameof(ClsLogFileSelectedItem) ||

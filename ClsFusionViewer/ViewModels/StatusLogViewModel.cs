@@ -12,7 +12,7 @@ namespace ClsFusionViewer.ViewModels
             SetGlobals();
         }
 
-        public override void OnPropChanged(object sender, PropertyChangedEventArgs e)
+        public override void PropertyChanged_(object sender, PropertyChangedEventArgs e)
         {
 
         }

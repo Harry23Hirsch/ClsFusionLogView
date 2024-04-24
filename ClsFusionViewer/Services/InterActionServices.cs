@@ -36,8 +36,10 @@ namespace ClsFusionViewer.Services
         }
         public void OpenInfoView()
         {
-            var info = new InfoView();
-            info.DataContext = new InfoViewModel();
+            var info = new InfoView
+            {
+                DataContext = new InfoViewModel(_interactionStore)
+            };
             info.ShowDialog();
         }
 

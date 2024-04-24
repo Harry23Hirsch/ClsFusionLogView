@@ -97,6 +97,15 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email kopiert ähnelt.
+        /// </summary>
+        internal static string EmailCopied {
+            get {
+                return ResourceManager.GetString("EmailCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Info ähnelt.
         /// </summary>
         internal static string InfoTitle {
@@ -106,11 +115,38 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Link kopiert ähnelt.
+        /// </summary>
+        internal static string LinkCopied {
+            get {
+                return ResourceManager.GetString("LinkCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Projekt geschlossen ähnelt.
+        /// </summary>
+        internal static string ProjectClosed {
+            get {
+                return ResourceManager.GetString("ProjectClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die CLS Status Log ähnelt.
         /// </summary>
         internal static string StatusLogViewTitle {
             get {
                 return ResourceManager.GetString("StatusLogViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Klicken zum kopieren ähnelt.
+        /// </summary>
+        internal static string ToolTipInfoLink {
+            get {
+                return ResourceManager.GetString("ToolTipInfoLink", resourceCulture);
             }
         }
         
