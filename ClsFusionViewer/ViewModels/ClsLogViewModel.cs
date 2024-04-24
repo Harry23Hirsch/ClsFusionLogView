@@ -177,10 +177,8 @@ namespace ClsFusionViewer.ViewModels
 
             var result = new List<ClsLogFileLine>();
 
-
             foreach (IEnumerable<ClsLogFileLineType> log in base.ClsStore_.ClsLogFiles)
             {
-
                 var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
                 foreach (ClsLogFileLine line in fu)
                 {
