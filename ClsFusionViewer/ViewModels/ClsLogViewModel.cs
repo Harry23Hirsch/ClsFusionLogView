@@ -122,41 +122,54 @@ namespace ClsFusionViewer.ViewModels
                     }
                 }
 
-                _clsLogLines = new ObservableCollection<ClsLogFileLine>(new ObservableCollection<ClsLogFileLine>(result).Reverse().ToList());
+                _clsLogLines = new ObservableCollection<ClsLogFileLine>(result.Reverse().ToList());
                 OnPropertyChanged(nameof(ClsLogLines));
             }
             else
             {
                 _clsLogMonth.Clear();
 
-                var resu = new List<string>();
-                var resuInt = new List<int>();
+                var resultMonthString = new List<string>();
+                var resultMonthInt = new List<int>();
+                var resultLogLines =  new List<ClsLogFileLine>();
 
                 foreach (IEnumerable<ClsLogFileLineType> log in storeLogFiles)
                 {
                     var fu = log.Select(x => new ClsLogFileLine(x)).ToList();
+
+                    if (fu[0].Year != int.Parse(_clsLogFileSelectedItem))
+                        continue;
+                    
+                    resultLogLines.AddRange(fu);
+
                     foreach (ClsLogFileLine line in fu)
                     {
                         if (line.Year == int.Parse(_clsLogFileSelectedItem))
                         {
-                            resuInt.Add(line.Month);
+                            resultMonthInt.Add(line.Month);
                             break;
                         }
                     }
                 }
 
-                resuInt.Sort();
-                resu.AddRange(resuInt.Select(x => x.ToString()));
-                resu.Add("Alle");
-                resu.Reverse();
+                resultMonthInt.Sort();
 
-                _clsLogMonth = new ObservableCollection<string>(resu);
+                resultMonthString.AddRange(resultMonthInt.Select(x => x.ToString()));
+                resultMonthString.Add("Alle");
+                resultMonthString.Reverse();
+
+                _clsLogMonth = new ObservableCollection<string>(resultMonthString);
                 _clsLogMonthSelectedItem = _clsLogMonth.First();
+
+                resultLogLines.Sort();
+                resultLogLines.Reverse();
+                _clsLogLines = new ObservableCollection<ClsLogFileLine>(resultLogLines);
             }
 
             OnPropertyChanged(nameof(ClsLogMonth));
             OnPropertyChanged(nameof(ClsLogMonthSelectedItem));
             OnPropertyChanged(nameof(IsClsMonthEnabled));
+            OnPropertyChanged(nameof(ClsLogLines));
         }
         private void MapLogMonth()
         {
