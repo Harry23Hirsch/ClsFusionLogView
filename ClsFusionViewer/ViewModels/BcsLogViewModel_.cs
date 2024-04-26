@@ -11,13 +11,13 @@ namespace ClsFusionViewer.ViewModels
     public class BcsLogViewModel_ : BaseLogViewModel
     {
         private readonly string[] _filterList = { "Alle", "15min", "20min", "30min", "40min", "60min", };
-        private ObservableCollection<BcsBatStatusInfo> _bcsLogs;
+        private ObservableCollection<string> _bcsLogs;
         private string _filterSelectedItem;
         private ObservableCollection<BatStatusType> _bcsLogLines;
-        private BcsBatStatusInfo _bcsLogsSelectedItem;
-        private BcsBatStatusInfo _bcsLogsLastSelectedItem;
+        private string _bcsLogsSelectedItem;
+        private string _bcsLogsLastSelectedItem;
 
-        public ObservableCollection<BcsBatStatusInfo> BcsLogs
+        public ObservableCollection<string> BcsLogs
         {
             get => _bcsLogs;
             set
@@ -26,7 +26,7 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(BcsLogs));
             }
         }
-        public BcsBatStatusInfo BcsLogsSelectedItem
+        public string BcsLogsSelectedItem
         {
             get => _bcsLogsSelectedItem;
             set
@@ -41,7 +41,7 @@ namespace ClsFusionViewer.ViewModels
                 }
             }
         }
-        public BcsBatStatusInfo BcsLogsLastSelectedItem
+        public string BcsLogsLastSelectedItem
         {
             get => _bcsLogsLastSelectedItem;
             set
@@ -75,49 +75,51 @@ namespace ClsFusionViewer.ViewModels
         {
             _filterSelectedItem = _filterList[0];
 
+            _bcsLogs = new ObservableCollection<string>( base.ClsStore_.BcsLogFiles.Select(x => x.BcsBatInfo.N.ToString()));
+
             SetGlobals();
         }
 
         private void FilterLogFiles()
         {
-            _bcsLogLines?.Clear();
-            _bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
+            //_bcsLogLines?.Clear();
+            //_bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
 
-            BcsBatStatusInfo item = null;
+            //BcsBatStatusInfo item = null;
 
-            if (this.FilterSelectedItem == null && this.FilterSelectedItem.Equals(_filterList[0]))
-            {
-                _bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
-            }
-            else if(this.FilterSelectedItem.Equals(_filterList[1]))
-            {
-                item = FilterBatStatus(_bcsLogsSelectedItem, 900);
-            }
-            else if (this.FilterSelectedItem.Equals(_filterList[2]))
-            {
-                item = FilterBatStatus(_bcsLogsSelectedItem, 1200);
-            }
-            else if (this.FilterSelectedItem.Equals(_filterList[3]))
-            {
-                item = FilterBatStatus(_bcsLogsSelectedItem, 1800);
-            }
-            else if (this.FilterSelectedItem.Equals(_filterList[4]))
-            {
-                item = FilterBatStatus(_bcsLogsSelectedItem, 2400);
-            }
-            else if (this.FilterSelectedItem.Equals(_filterList[5]))
-            {
-                item = FilterBatStatus(_bcsLogsSelectedItem, 3600);
-            }
+            //if (this.FilterSelectedItem == null && this.FilterSelectedItem.Equals(_filterList[0]))
+            //{
+            //    _bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
+            //}
+            //else if(this.FilterSelectedItem.Equals(_filterList[1]))
+            //{
+            //    item = FilterBatStatus(_bcsLogsSelectedItem, 900);
+            //}
+            //else if (this.FilterSelectedItem.Equals(_filterList[2]))
+            //{
+            //    item = FilterBatStatus(_bcsLogsSelectedItem, 1200);
+            //}
+            //else if (this.FilterSelectedItem.Equals(_filterList[3]))
+            //{
+            //    item = FilterBatStatus(_bcsLogsSelectedItem, 1800);
+            //}
+            //else if (this.FilterSelectedItem.Equals(_filterList[4]))
+            //{
+            //    item = FilterBatStatus(_bcsLogsSelectedItem, 2400);
+            //}
+            //else if (this.FilterSelectedItem.Equals(_filterList[5]))
+            //{
+            //    item = FilterBatStatus(_bcsLogsSelectedItem, 3600);
+            //}
 
-            if (item != null)
-            {
-                _bcsLogLines = item.BcsBatStatus;
-            }
+            //if (item != null)
+            //{
+            //    _bcsLogLines = item.BcsBatStatus;
+            //}
 
-            OnPropertyChanged(nameof(BcsLogLines));
-            OnPropertyChanged(nameof(BcsLogs));
-            OnPropertyChanged(nameof(BcsLogsSelectedItem));
+            //OnPropertyChanged(nameof(BcsLogLines));
+            //OnPropertyChanged(nameof(BcsLogs));
+            //OnPropertyChanged(nameof(BcsLogsSelectedItem));
 
             return;
         }

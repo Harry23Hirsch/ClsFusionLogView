@@ -46,7 +46,7 @@
 
                     <DataTemplate DataType="{x:Type ComboBoxItem}">
 
-                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}}" />
+                        <TextBlock Text="{Binding Path=. ,Converter={StaticResource UnixTicksToDateTime}}" />
 
                     </DataTemplate>
                     

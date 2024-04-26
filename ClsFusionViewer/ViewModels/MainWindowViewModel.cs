@@ -142,7 +142,7 @@ namespace ClsFusionViewer.ViewModels
         }
         private BaseViewModel CreateBcsLogViewModel()
         {
-            return new BcsLogViewModel_(_serviceProvider);
+            return new BcsLogViewModel(_serviceProvider);
         }
         private BaseViewModel CreateClsLogViewModel()
         {

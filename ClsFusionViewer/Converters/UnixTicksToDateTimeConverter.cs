@@ -17,7 +17,7 @@ namespace ClsFusionViewer.Converters
             else if (value.GetType() == typeof(Int64))
                 return utcTime.AddSeconds((Int64)value);
 
-            return utcTime.AddSeconds((int)value);
+            return utcTime.AddSeconds(long.Parse((string)value));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
