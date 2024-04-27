@@ -132,6 +132,9 @@
   <data name="EmailCopied" xml:space="preserve">
     <value>Email kopiert</value>
   </data>
+  <data name="HeaderActiveFaults" xml:space="preserve">
+    <value>Anstehende Störungen</value>
+  </data>
   <data name="InfoTitle" xml:space="preserve">
     <value>Info</value>
   </data>

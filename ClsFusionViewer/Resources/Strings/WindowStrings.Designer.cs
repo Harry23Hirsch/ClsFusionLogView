@@ -106,6 +106,15 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Anstehende Störungen ähnelt.
+        /// </summary>
+        internal static string HeaderActiveFaults {
+            get {
+                return ResourceManager.GetString("HeaderActiveFaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Info ähnelt.
         /// </summary>
         internal static string InfoTitle {

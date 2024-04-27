@@ -123,4 +123,7 @@
   <data name="LogEntriesFound" xml:space="preserve">
     <value>CLS Fusion Log-Einträge: {0}</value>
   </data>
+  <data name="StatusLogEntriesFound" xml:space="preserve">
+    <value>Anstehende Störungen: {0}</value>
+  </data>
 </root>

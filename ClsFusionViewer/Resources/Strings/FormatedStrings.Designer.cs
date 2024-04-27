@@ -77,5 +77,14 @@ namespace ClsFusionViewer.Resources.Strings {
                 return ResourceManager.GetString("LogEntriesFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Anstehende Störungen: {0} ähnelt.
+        /// </summary>
+        internal static string StatusLogEntriesFound {
+            get {
+                return ResourceManager.GetString("StatusLogEntriesFound", resourceCulture);
+            }
+        }
     }
 }
