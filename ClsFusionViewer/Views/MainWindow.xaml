@@ -34,9 +34,9 @@
         <!--Menu-->
         <Menu Grid.Row="0">
             <MenuItem Header="_Datei">
-                <MenuItem Header="ClsProjekt _öffnen" 
-                          Command="{Binding OpenCommand, UpdateSourceTrigger=PropertyChanged}"/>
-                
+                <MenuItem Header="ClsProjekt _öffnen"
+                          Command="{Binding OpenCommand, UpdateSourceTrigger=PropertyChanged}" />
+
                 <MenuItem Header="ClsProjekt _schliessen"
                           Command="{Binding CloseProjectCommand, UpdateSourceTrigger=PropertyChanged}" />
                 
@@ -99,7 +99,6 @@
                                      Style="{StaticResource RadioButtonTabItem}"
                                      Visibility="{Binding StatusLogEnabled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}"
                                      Command="{Binding StatusLogViewCommand}"/>
-
                     </StackPanel>
 
                     <!--Content-->
