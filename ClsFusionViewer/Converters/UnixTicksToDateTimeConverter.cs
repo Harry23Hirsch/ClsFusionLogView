@@ -17,6 +17,9 @@ namespace ClsFusionViewer.Converters
             else if (value.GetType() == typeof(Int64))
                 return utcTime.AddSeconds((Int64)value);
 
+            if (string.IsNullOrEmpty((string)value))
+                return utcTime.AddSeconds(0);
+
             return utcTime.AddSeconds(long.Parse((string)value));
         }
 

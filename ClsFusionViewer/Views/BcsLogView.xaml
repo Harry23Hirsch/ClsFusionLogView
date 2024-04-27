@@ -12,7 +12,7 @@
         <convert:UnixTicksToDateTimeConverter x:Key="UnixTicksToDateTime" />
         <convert:IntToFloatConverter x:Key="IntToDouble" />
     </UserControl.Resources>
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -32,42 +32,43 @@
                             Value="0 2 2 0" />
                 </Style>
             </StackPanel.Resources>
-            
+
+            <!--ComboBox BcsLogFiles-->
             <ComboBox x:Name="cb_LogFiles"
-                      ItemsSource="{Binding BcsLogs, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding BcsLogsSelectedItem, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalContentAlignment="left"
-                      VerticalContentAlignment="Center">
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding BcsLogs, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding BcsLogsSelectedItem, UpdateSourceTrigger=PropertyChanged}">
 
                 <ComboBox.ItemTemplate>
 
                     <DataTemplate DataType="{x:Type ComboBoxItem}">
-                        <TextBlock Text="{Binding BcsBatInfo.N, Converter={StaticResource UnixTicksToDateTime}, UpdateSourceTrigger=PropertyChanged}" 
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"/>
+
+                        <TextBlock Text="{Binding Path=. ,Converter={StaticResource UnixTicksToDateTime}}" />
+
                     </DataTemplate>
 
                 </ComboBox.ItemTemplate>
 
             </ComboBox>
 
+            <!--ComboBox BcLogFilter-->
             <ComboBox x:Name="cb_Filter"
-                      ItemsSource="{Binding FilterList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding FilterSelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedIndex="{Binding FilterSelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                       Width="100"
                       HorizontalContentAlignment="Left"
-                      VerticalContentAlignment="Center">
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding FilterList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding FilterSelectedItem, UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
 
         </StackPanel>
 
         <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding ElementName=cb_LogFiles, Path=SelectedItem.BcsBatStatus, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding BcsLogLines, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                
+
                 <DataGridTextColumn Header="Messzeitpunkt"
                                     Binding="{Binding N, Converter={StaticResource UnixTicksToDateTime}}"
                                     Width="170"
@@ -84,7 +85,7 @@
                 <DataGridTextColumn Header="Block 1 (U)"
                                     Binding="{Binding U.O, Converter={StaticResource IntToDouble}}"
                                     IsReadOnly="True" />
-                
+
                 <DataGridTextColumn Header="Block 2 (U)"
                                     Binding="{Binding U.T, Converter={StaticResource IntToDouble}}"
                                     IsReadOnly="True" />
@@ -93,4 +94,5 @@
         </DataGrid>
 
     </Grid>
+    
 </UserControl>

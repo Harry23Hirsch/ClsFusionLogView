@@ -36,6 +36,7 @@
                 </Style>
             </StackPanel.Resources>
 
+            <!--ComboBox BcsLogFiles-->
             <ComboBox x:Name="cb_LogFiles"
                       HorizontalContentAlignment="left"
                       VerticalContentAlignment="Center"
@@ -54,6 +55,7 @@
 
             </ComboBox>
 
+            <!--ComboBox BcLogFilter-->
             <ComboBox x:Name="cb_Filter"
                       Width="100"
                       HorizontalContentAlignment="Left"

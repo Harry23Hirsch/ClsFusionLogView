@@ -132,10 +132,6 @@
                                     <view:BcsLogView />
                                 </DataTemplate>
                                 
-                                <DataTemplate DataType="{x:Type vm:BcsLogViewModel_}">
-                                    <view:BcsLogView_ />
-                                </DataTemplate>
-                                
                                 <DataTemplate DataType="{x:Type vm:StatusLogViewModel}">
                                     <view:StatusLogView />
                                 </DataTemplate>

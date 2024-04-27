@@ -39,6 +39,11 @@ namespace ClsFusionViewer.ViewModels
                     _bcsLogsLastSelectedItem = _bcsLogsSelectedItem;
                     OnPropertyChanged(nameof(BcsLogsLastSelectedItem));
                 }
+
+                GetBcsLogLines();
+                OnPropertyChanged(nameof(BcsLogLines));
+
+                FilterLogFiles();
             }
         }
         public string BcsLogsLastSelectedItem
@@ -68,70 +73,66 @@ namespace ClsFusionViewer.ViewModels
                 _filterSelectedItem = value;
                 OnPropertyChanged(nameof(FilterSelectedItem));
 
+                FilterLogFiles();
+
             }
         }
 
         public BcsLogViewModel_(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _filterSelectedItem = _filterList[0];
-
             _bcsLogs = new ObservableCollection<string>( base.ClsStore_.BcsLogFiles.Select(x => x.BcsBatInfo.N.ToString()));
+
+            this.BcsLogsSelectedItem = _bcsLogs.Last();
+            this.FilterSelectedItem = _filterList[0];
 
             SetGlobals();
         }
 
+        private void GetBcsLogLines()
+        {
+            var foo = base.ClsStore_.BcsLogFiles.Where(x => x.BcsBatInfo.N.ToString().Equals(_bcsLogsSelectedItem)).FirstOrDefault();
+            _bcsLogLines = new ObservableCollection<BatStatusType>(foo.BcsBatStatus.ToList());
+        }
         private void FilterLogFiles()
         {
-            //_bcsLogLines?.Clear();
-            //_bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
+            if (this.FilterSelectedItem == null || this.FilterSelectedItem.Equals(_filterList[0]))
+            {
+                GetBcsLogLines();
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[1]))
+            {
+                _bcsLogLines = FilterBatStatus(_bcsLogLines, 900);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[2]))
+            {
+                _bcsLogLines = FilterBatStatus(_bcsLogLines, 1200);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[3]))
+            {
+                _bcsLogLines = FilterBatStatus(_bcsLogLines, 1800);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[4]))
+            {
+                _bcsLogLines = FilterBatStatus(_bcsLogLines, 2400);
+            }
+            else if (this.FilterSelectedItem.Equals(_filterList[5]))
+            {
+                _bcsLogLines = FilterBatStatus(_bcsLogLines, 3600);
+            }
 
-            //BcsBatStatusInfo item = null;
-
-            //if (this.FilterSelectedItem == null && this.FilterSelectedItem.Equals(_filterList[0]))
-            //{
-            //    _bcsLogLines = _bcsLogsSelectedItem.BcsBatStatus;
-            //}
-            //else if(this.FilterSelectedItem.Equals(_filterList[1]))
-            //{
-            //    item = FilterBatStatus(_bcsLogsSelectedItem, 900);
-            //}
-            //else if (this.FilterSelectedItem.Equals(_filterList[2]))
-            //{
-            //    item = FilterBatStatus(_bcsLogsSelectedItem, 1200);
-            //}
-            //else if (this.FilterSelectedItem.Equals(_filterList[3]))
-            //{
-            //    item = FilterBatStatus(_bcsLogsSelectedItem, 1800);
-            //}
-            //else if (this.FilterSelectedItem.Equals(_filterList[4]))
-            //{
-            //    item = FilterBatStatus(_bcsLogsSelectedItem, 2400);
-            //}
-            //else if (this.FilterSelectedItem.Equals(_filterList[5]))
-            //{
-            //    item = FilterBatStatus(_bcsLogsSelectedItem, 3600);
-            //}
-
-            //if (item != null)
-            //{
-            //    _bcsLogLines = item.BcsBatStatus;
-            //}
-
-            //OnPropertyChanged(nameof(BcsLogLines));
-            //OnPropertyChanged(nameof(BcsLogs));
-            //OnPropertyChanged(nameof(BcsLogsSelectedItem));
+            OnPropertyChanged(nameof(BcsLogLines));
 
             return;
         }
-        private BcsBatStatusInfo FilterBatStatus(BcsBatStatusInfo item, int timeStop)
+        private ObservableCollection<BatStatusType> FilterBatStatus(IEnumerable<BatStatusType> bcsLogLines, int timeStop)
         {
             var result = new List<BatStatusType>();
-            long temp = item.BcsBatStatus.First().N;
-            long last = item.BcsBatStatus.Last().N;
+            long temp = bcsLogLines.First().N;
+            long last = bcsLogLines.Last().N;
 
-            result.Add(item.BcsBatStatus.First());
+            result.Add(bcsLogLines.First());
 
-            foreach (BatStatusType b in item.BcsBatStatus)
+            foreach (BatStatusType b in bcsLogLines)
             {
                 if (b.N == last)
                 {
@@ -146,26 +147,23 @@ namespace ClsFusionViewer.ViewModels
                     result.Add(b);
                 }
             }
-
-            item.BcsBatStatus = new ObservableCollection<BatStatusType>(result);
-
-            return item;
+            
+            return new ObservableCollection<BatStatusType>(result);
         }
 
         public override void PropertyChanged_(object sender, PropertyChangedEventArgs e)
         {
-            //if (e.PropertyName == nameof(BcsLogsSelectedItem) ||
-            //    e.PropertyName == nameof(FilterSelectedItem))
-            //{
-            //    if (this.BcsLogsSelectedItem != null)
-            //    {
-            //        IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-            //            .SetStatusBarInfoText(
-            //                String.Format(
-            //                    Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-            //                    _bcsLogs.Count));
-            //    }
-            //}
+            if (e.PropertyName == nameof(BcsLogLines))
+            {
+                if (this.BcsLogsSelectedItem != null)
+                {
+                    IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
+                        .SetStatusBarInfoText(
+                            String.Format(
+                                Resources.Strings.FormatedStrings.BcsLogEntriesFound,
+                                _bcsLogLines.Count));
+                }
+            }
         }
         public override void SetGlobals()
         {
@@ -176,12 +174,6 @@ namespace ClsFusionViewer.ViewModels
                         Resources.Strings.WindowStrings.DefaultTitle,
                         Resources.Strings.WindowStrings.BcsLogViewTitle)
                     );
-
-            //IoC.Helper.GetScopedService<InterActionServices>(base.ServiceProvider_)?
-            //            .SetStatusBarInfoText(
-            //                String.Format(
-            //                    Resources.Strings.FormatedStrings.BcsLogEntriesFound,
-            //                    _bcsLogs.Count));
         }
     }
 }
