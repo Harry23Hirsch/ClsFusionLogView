@@ -167,7 +167,7 @@ namespace ClsFusionViewer.ViewModels
 
         private void OpenProjectCommand_Execute(object obj)
         {
-            if (Test())
+            if (LoadCLS())
             {
                 _projectLoaded = true;
                 OnPropertyChanged(nameof(ProjectLoaded));
@@ -201,7 +201,7 @@ namespace ClsFusionViewer.ViewModels
                 .OpenInfoView();
         }
 
-        private bool Test()
+        private bool LoadCLS()
         {
             var projectPath = IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.OpenFolderDialog() ?? throw new AccessViolationException();
 
