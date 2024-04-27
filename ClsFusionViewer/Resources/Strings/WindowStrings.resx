@@ -141,6 +141,12 @@
   <data name="LinkCopied" xml:space="preserve">
     <value>Link kopiert</value>
   </data>
+  <data name="NoLogs" xml:space="preserve">
+    <value>Keine Logs</value>
+  </data>
+  <data name="NoLogsFound" xml:space="preserve">
+    <value>Keine Logs gefunden</value>
+  </data>
   <data name="ProjectClosed" xml:space="preserve">
     <value>Projekt geschlossen</value>
   </data>

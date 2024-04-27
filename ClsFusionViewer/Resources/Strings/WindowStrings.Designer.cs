@@ -133,6 +133,24 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Logs ähnelt.
+        /// </summary>
+        internal static string NoLogs {
+            get {
+                return ResourceManager.GetString("NoLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Logs gefunden ähnelt.
+        /// </summary>
+        internal static string NoLogsFound {
+            get {
+                return ResourceManager.GetString("NoLogsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Projekt geschlossen ähnelt.
         /// </summary>
         internal static string ProjectClosed {

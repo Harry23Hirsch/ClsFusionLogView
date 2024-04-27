@@ -171,6 +171,13 @@ namespace ClsFusionViewer.ViewModels
             {
                 _projectLoaded = true;
                 OnPropertyChanged(nameof(ProjectLoaded));
+
+                _clsLogViewCommand.Execute(null);
+            }
+            else
+            {
+                IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+                    .ShowMessageBox(Resources.Strings.WindowStrings.NoLogsFound, Resources.Strings.WindowStrings.NoLogs);
             }
         }
         private bool OpenProjectCommand_CanExecute(object obj)
@@ -203,7 +210,8 @@ namespace ClsFusionViewer.ViewModels
 
         private bool LoadCLS()
         {
-            var projectPath = IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?.OpenFolderDialog() ?? throw new AccessViolationException();
+            var projectPath = IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
+                .OpenFolderDialog() ?? throw new AccessViolationException();
 
             if (string.IsNullOrEmpty(projectPath))
             {
@@ -259,9 +267,7 @@ namespace ClsFusionViewer.ViewModels
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
 
-            _clsLogViewCommand.Execute(null);
-
-            return true;
+            return _clsLogEnabled || _bcsLogEnabled || _statusLogEnabled;
         }
     }
 }
