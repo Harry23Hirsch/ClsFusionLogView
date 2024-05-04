@@ -342,9 +342,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ClsLogView.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="ClsLogView16x16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
