@@ -9,7 +9,6 @@ namespace ClsFusionViewer.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var utcTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var foo = value.GetType();
 
             if (value.GetType() == typeof(int))
                 return utcTime.AddSeconds((int)value);

@@ -156,6 +156,12 @@
   <data name="ToolTipInfoLink" xml:space="preserve">
     <value>Klicken zum kopieren</value>
   </data>
+  <data name="ToolTipLogFile" xml:space="preserve">
+    <value>Logdatei</value>
+  </data>
+  <data name="ToolTipMessInterval" xml:space="preserve">
+    <value>Messinterval</value>
+  </data>
   <data name="Url" xml:space="preserve">
     <value>https://github.com/Harry23Hirsch/ClsFusionViewer</value>
   </data>

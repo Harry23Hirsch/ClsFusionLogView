@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
              xmlns:local="clr-namespace:ClsFusionViewer.Views"
              xmlns:convert="clr-namespace:ClsFusionViewer.Converters"
+             xmlns:rexs="clr-namespace:ClsFusionViewer.Resources.Strings"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -44,7 +47,7 @@
 
                     <DataTemplate DataType="{x:Type ComboBoxItem}">
 
-                        <TextBlock Text="{Binding Path=. ,Converter={StaticResource UnixTicksToDateTime}}" />
+                        <TextBlock Text="{Binding Path=. ,Converter={StaticResource UnixTicksToDateTime}, FallbackValue=1700000}" />
 
                     </DataTemplate>
 

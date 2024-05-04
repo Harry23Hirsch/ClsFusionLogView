@@ -178,6 +178,24 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Logdatei ähnelt.
+        /// </summary>
+        internal static string ToolTipLogFile {
+            get {
+                return ResourceManager.GetString("ToolTipLogFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Messinterval ähnelt.
+        /// </summary>
+        internal static string ToolTipMessInterval {
+            get {
+                return ResourceManager.GetString("ToolTipMessInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die https://github.com/Harry23Hirsch/ClsFusionViewer ähnelt.
         /// </summary>
         internal static string Url {
