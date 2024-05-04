@@ -95,6 +95,8 @@ namespace ClsFusionViewer.ViewModels
         }
         private void FilterLogFiles()
         {
+            GetBcsLogLines();
+
             if (this.FilterSelectedItem == null || this.FilterSelectedItem.Equals(_filterList[0]))
             {
                 GetBcsLogLines();
