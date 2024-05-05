@@ -178,6 +178,9 @@ namespace ClsFusionViewer.ViewModels
             {
                 IoC.Helper.GetScopedService<InterActionServices>(_serviceProvider)?
                     .ShowMessageBox(Resources.Strings.WindowStrings.NoLogsFound, Resources.Strings.WindowStrings.NoLogs);
+
+                IoC.Helper.GetScopedService<BugLogServiceFactory>(_serviceProvider)?
+                    .BugLogWrite(nameof(LoadCLS), "No Logs found");
             }
         }
         private bool OpenProjectCommand_CanExecute(object obj)
@@ -231,10 +234,13 @@ namespace ClsFusionViewer.ViewModels
                     _clsLogEnabled = false;
                 OnPropertyChanged(nameof(ClsLogEnabled));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _clsLogEnabled = false;
                 OnPropertyChanged(nameof(ClsLogEnabled));
+
+                IoC.Helper.GetScopedService<BugLogServiceFactory>(_serviceProvider)?
+                    .BugLogWrite(ex, nameof(fh.GetClsLogFiles));
             }
 
             try
@@ -246,10 +252,13 @@ namespace ClsFusionViewer.ViewModels
                     _bcsLogEnabled = false;
                 OnPropertyChanged(nameof(BcsLogEnabled));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _bcsLogEnabled = false;
                 OnPropertyChanged(nameof(BcsLogEnabled));
+
+                IoC.Helper.GetScopedService<BugLogServiceFactory>(_serviceProvider)?
+                    .BugLogWrite(ex, nameof(fh.GetBtLogFiles));
             }
 
             try
@@ -261,10 +270,13 @@ namespace ClsFusionViewer.ViewModels
                     _statusLogEnabled = false;
                 OnPropertyChanged(nameof(StatusLogEnabled));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _statusLogEnabled = false;
                 OnPropertyChanged(nameof(StatusLogEnabled));
+
+                IoC.Helper.GetScopedService<BugLogServiceFactory>(_serviceProvider)?
+                    .BugLogWrite(ex, nameof(fh.GetClsFaultInfos));
             }
 
             return _clsLogEnabled || _bcsLogEnabled || _statusLogEnabled;

@@ -16,17 +16,18 @@ namespace ClsFusionViewer.Services
         {
 
             _fileName = fileName;
+
+            if (!File.Exists(_fileName))
+            {
+                File.Create(_fileName).Dispose();
+            }
         }
 
         public override void Log(string message)
         {
             lock (base.lockObj)
             {
-                using (StreamWriter streamWriter = new StreamWriter(_fileName))
-                {
-                    streamWriter.WriteLine(message);
-                    streamWriter.Close();
-                }
+                File.AppendAllText(_fileName, message);
             }
         }
     }

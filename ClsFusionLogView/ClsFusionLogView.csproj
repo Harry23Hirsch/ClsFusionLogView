@@ -221,6 +221,7 @@
       <DependentUpon>WindowStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\BugLogService.cs" />
+    <Compile Include="Services\BugLogServiceFactory.cs" />
     <Compile Include="Services\InterActionServices.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\ClsStore.cs" />
@@ -337,5 +338,6 @@
   <ItemGroup>
     <Resource Include="ClsLogView16x16.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
