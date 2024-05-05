@@ -1,0 +1,154 @@
+﻿<Window x:Class="ClsFusionViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:vm="clr-namespace:ClsFusionViewer.ViewModels"
+        xmlns:view="clr-namespace:ClsFusionViewer.Views"
+        
+        mc:Ignorable="d"
+        
+        Title="{Binding WindowTitle, UpdateSourceTrigger=PropertyChanged}"
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="760"
+        x:Name="MyMainWindow"
+        FontFamily="Monsterrat"
+        FontSize="14">
+
+    <Window.Resources>
+
+        <BooleanToVisibilityConverter x:Key="boolTovisi" />
+        
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!--Menu-->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_Datei">
+                <MenuItem Header="ClsProjekt _öffnen"
+                          Command="{Binding OpenCommand, UpdateSourceTrigger=PropertyChanged}" />
+
+                <MenuItem Header="ClsProjekt _schliessen"
+                          Command="{Binding CloseProjectCommand, UpdateSourceTrigger=PropertyChanged}" />
+                
+                <Separator />
+                
+                <MenuItem Header="_Beenden"
+                          Command="{Binding CloseCommand, UpdateSourceTrigger=PropertyChanged}"
+                          CommandParameter="{Binding ElementName=MyMainWindow}"/>
+            </MenuItem>
+
+            <MenuItem Header="_Hilfe">
+                <MenuItem Header="_Info" 
+                          Command="{Binding OpenInfoCommand, UpdateSourceTrigger=PropertyChanged}"/>
+            </MenuItem>
+        </Menu>
+
+        <!--Content-->
+        <Border Grid.Row="2">
+
+            <Border.Background>
+
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                    <GradientStop Color="#DEDEDE"
+                                  Offset="0.25" />
+                    <GradientStop Color="#C6C2C2"
+                                  Offset="0.75" />
+                </LinearGradientBrush>
+
+            </Border.Background>
+            
+            <Border Grid.Row="2"
+                    BorderThickness="1"
+                    BorderBrush="DarkGray"
+                    Visibility="{Binding ProjectLoaded, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--TabBar-->
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                Margin="2 5 0 0">
+
+                        <RadioButton Content="Cls Log"
+                                     Style="{StaticResource RadioButtonTabItem}" 
+                                     Visibility="{Binding ClsLogEnabled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}"
+                                     Command="{Binding ClsLogViewCommand}"
+                                     IsChecked="{Binding ClsLogIsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <RadioButton Content="Bcs Log"
+                                     Style="{StaticResource RadioButtonTabItem}"
+                                     Visibility="{Binding BcsLogEnabled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}"
+                                     Command="{Binding BcsLogViewCommand}" />
+
+                        <RadioButton Content="Status Log"
+                                     Style="{StaticResource RadioButtonTabItem}"
+                                     Visibility="{Binding StatusLogEnabled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolTovisi}}"
+                                     Command="{Binding StatusLogViewCommand}"/>
+                    </StackPanel>
+
+                    <!--Content-->
+                    <Border Grid.Row="1"
+                            BorderThickness="1"
+                            BorderBrush="DarkGray"
+                            Margin="2 0 2 2">
+
+                        <Border.Background>
+
+                            <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="0,1">
+                                <GradientStop Color="#C4C4C4"
+                                              Offset="0.0" />
+                                <GradientStop Color="#E6E6E6"
+                                              Offset="0.75" />
+                            </LinearGradientBrush>
+
+                        </Border.Background>
+
+                        <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}">
+
+                            <ContentControl.Resources>
+
+                                <DataTemplate DataType="{x:Type vm:ClsLogViewModel}">
+                                    <view:ClsLogView />
+                                </DataTemplate>
+                                
+                                <DataTemplate DataType="{x:Type vm:BcsLogViewModel}">
+                                    <view:BcsLogView />
+                                </DataTemplate>
+                                
+                                <DataTemplate DataType="{x:Type vm:StatusLogViewModel}">
+                                    <view:StatusLogView />
+                                </DataTemplate>
+
+                            </ContentControl.Resources>
+                            
+                        </ContentControl>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+        </Border>
+
+        <!--Statusbar-->
+        <StatusBar Grid.Row="3">
+            <TextBlock Text="{Binding StatusBarInfoText, UpdateSourceTrigger=PropertyChanged}"/>
+        </StatusBar>
+    </Grid>
+</Window>

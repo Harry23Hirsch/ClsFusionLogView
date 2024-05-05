@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="ClsFusionViewer.Views.BcsLogView_"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:local="clr-namespace:ClsFusionViewer.Views"
+             xmlns:convert="clr-namespace:ClsFusionViewer.Converters"
+             
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <convert:UnixTicksToDateTimeConverter x:Key="UnixTicksToDateTime" />
+        <convert:IntToFloatConverter x:Key="IntToDouble" />
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+
+            <StackPanel.Resources>
+
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Width"
+                            Value="200" />
+                    <Setter Property="Margin"
+                            Value="0 2 2 0" />
+                </Style>
+            </StackPanel.Resources>
+
+            <!--ComboBox BcsLogFiles-->
+            <ComboBox x:Name="cb_LogFiles"
+                      HorizontalContentAlignment="left"
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding BcsLogs, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding BcsLogsSelectedItem, UpdateSourceTrigger=PropertyChanged}">
+
+                <ComboBox.ItemTemplate>
+
+                    <DataTemplate DataType="{x:Type ComboBoxItem}">
+
+                        <TextBlock Text="{Binding Path=. ,Converter={StaticResource UnixTicksToDateTime}}" />
+
+                    </DataTemplate>
+                    
+                </ComboBox.ItemTemplate>
+
+            </ComboBox>
+
+            <!--ComboBox BcLogFilter-->
+            <ComboBox x:Name="cb_Filter"
+                      Width="100"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding FilterList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding FilterSelectedItem, UpdateSourceTrigger=PropertyChanged}">
+            </ComboBox>
+
+        </StackPanel>
+
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding BcsLogLines, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Messzeitpunkt"
+                                    Binding="{Binding N, Converter={StaticResource UnixTicksToDateTime}}"
+                                    Width="170"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Kapazität (C)"
+                                    Binding="{Binding C}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Strom (I)"
+                                    Binding="{Binding I, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Block 1 (U)"
+                                    Binding="{Binding U.O, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Block 2 (U)"
+                                    Binding="{Binding U.T, Converter={StaticResource IntToDouble}}"
+                                    IsReadOnly="True" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+    
+</UserControl>
