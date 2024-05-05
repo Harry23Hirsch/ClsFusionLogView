@@ -88,7 +88,7 @@ namespace ClsFusionViewer.Resources.Strings {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die m.szmajduch@protonmail.com ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die m.szmajduch@proton.me ähnelt.
         /// </summary>
         internal static string Email {
             get {
