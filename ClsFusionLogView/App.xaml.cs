@@ -1,11 +1,10 @@
 ﻿using ClsFusionViewer.ViewModels;
-using System.Windows;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using ClsFusionViewer.Services;
 using ClsFusionViewer.Stores;
 using ClsFusionViewer.Resources.Strings;
-using System;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace ClsFusionViewer
 {
@@ -24,6 +23,7 @@ namespace ClsFusionViewer
 
                     services.AddSingleton<NavigationService>();
                     services.AddTransient<InterActionServices>();
+                    services.AddSingleton<BugLogService>();
 
                     services.AddSingleton<ClsLogViewModel>();
                     services.AddSingleton<BcsLogViewModel>();

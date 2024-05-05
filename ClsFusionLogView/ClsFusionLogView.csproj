@@ -220,6 +220,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WindowStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\BugLogService.cs" />
     <Compile Include="Services\InterActionServices.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\ClsStore.cs" />
