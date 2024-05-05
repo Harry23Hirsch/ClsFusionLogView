@@ -1,0 +1,18 @@
+			<2022-10>
+
+03. 06:08:19>Funktionstest gestartet
+03. 06:09:22>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+03. 06:09:23>Funktionstest mit Fehlern beendet
+10. 06:08:27>Funktionstest gestartet
+10. 06:09:29>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+10. 06:09:31>Funktionstest mit Fehlern beendet
+17. 06:08:33>Funktionstest gestartet
+17. 06:09:36>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+17. 06:09:38>Funktionstest mit Fehlern beendet
+24. 06:08:49>Funktionstest gestartet
+24. 06:09:51>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+24. 06:09:53>Leuchtenkommunikationsstörung (Bus:1, Platz:2, Stromkreis:2, Leuchte:9)
+24. 06:09:53>Funktionstest mit Fehlern beendet
+31. 05:08:55>Funktionstest gestartet
+31. 05:09:58>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+31. 05:09:59>Funktionstest mit Fehlern beendet

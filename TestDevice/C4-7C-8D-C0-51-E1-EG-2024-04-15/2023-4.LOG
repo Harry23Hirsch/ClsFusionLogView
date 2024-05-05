@@ -1,0 +1,19 @@
+			<2023-4>
+
+03. 06:12:30>Funktionstest gestartet
+03. 06:13:32>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+03. 06:13:34>Funktionstest mit Fehlern beendet
+10. 06:12:34>Funktionstest gestartet
+10. 06:13:36>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+10. 06:13:38>Funktionstest mit Fehlern beendet
+17. 06:12:43>Funktionstest gestartet
+17. 06:13:46>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+17. 06:13:47>Leuchtenkommunikationsstörung (Bus:1, Platz:2, Stromkreis:2, Leuchte:2)
+17. 06:13:48>Funktionstest mit Fehlern beendet
+24. 06:13:09>Funktionstest gestartet
+24. 06:14:11>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+24. 06:14:13>Funktionstest mit Fehlern beendet
+25. 13:45:18>Netzausfall Unterverteiler
+25. 13:45:18>Netzausfall Unterverteiler Ende
+25. 13:45:46>Netzausfall Unterverteiler
+25. 13:45:46>Netzausfall Unterverteiler Ende

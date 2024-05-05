@@ -1,0 +1,68 @@
+			<2024-1>
+
+01. 05:18:48>Funktionstest gestartet
+01. 05:19:54>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+01. 05:19:55>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:4)
+01. 05:19:55>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:5)
+01. 05:19:56>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+01. 05:19:56>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+01. 05:19:57>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+01. 05:19:57>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:7)
+01. 05:19:58>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:8)
+01. 05:19:58>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+01. 05:19:59>Funktionstest mit Fehlern beendet
+08. 05:19:03>Funktionstest gestartet
+08. 05:20:08>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+08. 05:20:08>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:4)
+08. 05:20:09>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:5)
+08. 05:20:09>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+08. 05:20:10>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+08. 05:20:11>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+08. 05:20:11>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:7)
+08. 05:20:11>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:8)
+08. 05:20:12>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+08. 05:20:13>Leuchtenkommunikationsstörung (Bus:1, Platz:2, Stromkreis:2, Leuchte:2)
+08. 05:20:13>Funktionstest mit Fehlern beendet
+09. 10:12:43>Netzausfall Unterverteiler
+09. 10:12:47>Netzausfall Unterverteiler Ende
+15. 05:18:59>Funktionstest gestartet
+15. 05:20:04>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+15. 05:20:05>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:4)
+15. 05:20:05>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:5)
+15. 05:20:06>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+15. 05:20:06>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+15. 05:20:07>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+15. 05:20:07>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:7)
+15. 05:20:08>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:8)
+15. 05:20:08>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+15. 05:20:09>Funktionstest mit Fehlern beendet
+22. 05:19:19>Funktionstest gestartet
+22. 05:20:33>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+22. 05:20:33>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:4)
+22. 05:20:34>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:5)
+22. 05:20:34>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+22. 05:20:35>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+22. 05:20:36>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+22. 05:20:36>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:3)
+22. 05:20:36>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:4)
+22. 05:20:37>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:5)
+22. 05:20:37>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:6)
+22. 05:20:38>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:7)
+22. 05:20:38>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:8)
+22. 05:20:39>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+22. 05:20:40>Funktionstest mit Fehlern beendet
+29. 05:19:27>Funktionstest gestartet
+29. 05:20:41>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+29. 05:20:42>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:4)
+29. 05:20:42>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:5)
+29. 05:20:42>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+29. 05:20:43>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+29. 05:20:44>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+29. 05:20:44>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:3)
+29. 05:20:45>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:4)
+29. 05:20:45>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:5)
+29. 05:20:45>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:6)
+29. 05:20:46>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:7)
+29. 05:20:46>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:8)
+29. 05:20:47>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+29. 05:20:48>Funktionstest mit Fehlern beendet

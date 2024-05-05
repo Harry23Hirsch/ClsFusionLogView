@@ -1,0 +1,85 @@
+			<2023-6>
+
+05. 06:13:45>Funktionstest gestartet
+05. 06:14:48>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+05. 06:14:49>Funktionstest mit Fehlern beendet
+12. 06:14:06>Funktionstest gestartet
+12. 06:15:09>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+12. 06:15:11>Funktionstest mit Fehlern beendet
+19. 06:14:09>Funktionstest gestartet
+19. 06:15:11>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+19. 06:15:12>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+19. 06:15:12>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+19. 06:15:13>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+19. 06:15:13>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+19. 06:15:15>Funktionstest mit Fehlern beendet
+26. 06:14:24>Funktionstest gestartet
+26. 06:15:27>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:3)
+26. 06:15:27>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:7)
+26. 06:15:27>Leuchtenkommunikationsstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:14)
+26. 06:15:28>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:1, Leuchte:16)
+26. 06:15:29>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:2)
+26. 06:15:29>Leuchtenstörung (Bus:1, Platz:1, Stromkreis:2, Leuchte:20)
+26. 06:15:30>Funktionstest mit Fehlern beendet
+26. 09:10:45>Netzausfall Unterverteiler
+26. 09:35:53>Netzausfall Unterverteiler Ende
+26. 12:23:01>Handrückschaltung quittiert
+26. 12:24:19>Handrückschaltung quittiert
+26. 12:26:36>Netzausfall Unterverteiler
+26. 12:26:36>Netzausfall Unterverteiler Ende
+26. 12:27:15>Netzausfall Unterverteiler
+26. 12:27:15>Netzausfall Unterverteiler Ende
+27. 08:04:39>Netzausfall Unterverteiler
+27. 08:04:39>Netzausfall Unterverteiler Ende
+27. 11:05:04>Netzausfall Unterverteiler
+27. 11:05:04>Netzausfall Unterverteiler Ende
+27. 11:05:09>Netzausfall Unterverteiler
+27. 11:05:09>Netzausfall Unterverteiler Ende
+27. 11:05:09>Netzausfall Unterverteiler
+27. 11:05:09>Netzausfall Unterverteiler Ende
+27. 11:06:12>Netzausfall Unterverteiler
+27. 11:06:12>Netzausfall Unterverteiler Ende
+27. 11:06:12>Netzausfall Unterverteiler
+27. 11:06:13>Netzausfall Unterverteiler Ende
+27. 11:06:13>Netzausfall Unterverteiler
+27. 11:06:14>Netzausfall Unterverteiler Ende
+27. 11:06:14>Netzausfall Unterverteiler
+27. 11:06:16>Netzausfall Unterverteiler Ende
+27. 11:06:20>Netzausfall Unterverteiler
+27. 11:06:20>Netzausfall Unterverteiler Ende
+27. 11:06:25>Netzausfall Unterverteiler
+27. 11:06:25>Netzausfall Unterverteiler Ende
+27. 11:06:28>Netzausfall Unterverteiler
+27. 11:06:29>Netzausfall Unterverteiler Ende
+27. 11:06:29>Netzausfall Unterverteiler
+27. 11:06:30>Netzausfall Unterverteiler Ende
+27. 11:06:30>Netzausfall Unterverteiler
+27. 11:06:30>Netzausfall Unterverteiler Ende
+27. 11:06:30>Netzausfall Unterverteiler
+27. 11:06:31>Netzausfall Unterverteiler Ende
+27. 11:06:37>Netzausfall Unterverteiler
+27. 11:06:38>Netzausfall Unterverteiler Ende
+27. 11:06:38>Netzausfall Unterverteiler
+27. 11:06:38>Netzausfall Unterverteiler Ende
+27. 11:06:39>Netzausfall Unterverteiler
+27. 11:06:39>Netzausfall Unterverteiler Ende
+27. 11:06:40>Netzausfall Unterverteiler
+27. 11:06:40>Netzausfall Unterverteiler Ende
+27. 11:06:42>Netzausfall Unterverteiler
+27. 11:06:42>Netzausfall Unterverteiler Ende
+27. 11:06:42>Netzausfall Unterverteiler
+27. 11:06:43>Netzausfall Unterverteiler Ende
+27. 11:06:44>Netzausfall Unterverteiler
+27. 11:06:44>Netzausfall Unterverteiler Ende
+27. 11:06:45>Netzausfall Unterverteiler
+27. 11:06:58>Netzausfall Unterverteiler Ende
+27. 11:06:59>Netzausfall Unterverteiler
+27. 11:06:59>Netzausfall Unterverteiler Ende
+27. 11:06:59>Netzausfall Unterverteiler
+27. 11:06:59>Netzausfall Unterverteiler Ende
+27. 11:07:00>Netzausfall Unterverteiler
+27. 11:07:00>Netzausfall Unterverteiler Ende
+27. 11:57:33>Netzausfall Unterverteiler
+27. 11:57:35>Netzausfall Unterverteiler Ende
+30. 07:58:34>Netzausfall Hauptverteiler
+30. 07:58:34>Netzausfall Hauptverteiler Ende

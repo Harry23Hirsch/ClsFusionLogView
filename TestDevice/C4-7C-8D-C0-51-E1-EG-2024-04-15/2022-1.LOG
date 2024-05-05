@@ -1,0 +1,17 @@
+			<2022-1>
+
+03. 05:02:13>Funktionstest gestartet
+03. 05:03:16>Funktionstest erfolgreich beendet
+03. 05:03:16>Betrieb
+10. 05:02:10>Funktionstest gestartet
+10. 05:03:13>Funktionstest erfolgreich beendet
+10. 05:03:13>Betrieb
+17. 05:02:35>Funktionstest gestartet
+17. 05:03:39>Funktionstest erfolgreich beendet
+17. 05:03:39>Betrieb
+24. 05:02:40>Funktionstest gestartet
+24. 05:03:44>Leuchtenkommunikationsstörung (Bus:1, Platz:2, Stromkreis:2, Leuchte:3)
+24. 05:03:44>Funktionstest mit Fehlern beendet
+31. 05:02:40>Funktionstest gestartet
+31. 05:03:44>Leuchtenkommunikationsstörung (Bus:1, Platz:2, Stromkreis:2, Leuchte:10)
+31. 05:03:45>Funktionstest mit Fehlern beendet
